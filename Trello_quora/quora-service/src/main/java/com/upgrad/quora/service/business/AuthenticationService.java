@@ -54,7 +54,7 @@ public class AuthenticationService {
     //todo: change name as authenticate and logout
     @Transactional(propagation = Propagation.REQUIRED)
     public UserAuth authenticateBearer(String token) throws SignOutRestrictedException {
-        UserAuth  userEntity = userDao.FindByAuthToken(token);
+        UserAuth  userEntity = userDao.getUserAuthToken(token);
         if(userEntity == null){
             throw new SignOutRestrictedException("SGR-001","User is not Signed in");
         }

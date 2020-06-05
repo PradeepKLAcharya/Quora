@@ -50,8 +50,12 @@ public class UserDao {
         }
     }
 
-    public void updateUserEntity(UserAuth userEntity) {
-        entityManager.merge(userEntity);
+    public UserAuth updateUserEntity(UserAuth userEntity) {
+        try {
+            return entityManager.merge(userEntity);
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
     public Users getUser(String Uuid) {

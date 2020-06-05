@@ -11,6 +11,7 @@ import com.upgrad.quora.service.dao.QuestionDao;
 import com.upgrad.quora.service.entity.Question;
 import com.upgrad.quora.service.entity.UserAuth;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
+import com.upgrad.quora.service.exception.UserNotFoundException;
 
 /**
  * @author Avinash
@@ -30,7 +31,7 @@ public class QuestionService {
 	 * @throws AuthorizationFailedException
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
-	public Question createQuestion(Question question, UserAuth userAuthTokenEntity){
+	public Question createQuestion(Question question, UserAuth userAuthTokenEntity) {
 		return questionDao.createQuestion(question);
 	}
 
@@ -39,8 +40,24 @@ public class QuestionService {
 	 * @return List<Question>
 	 * @throws AuthorizationFailedException
 	 */
-	public List<Question> getAllQuestions(UserAuth userAuthTokenEntity){
+	public List<Question> getAllQuestions(UserAuth userAuthTokenEntity) {
 		return questionDao.getQuestions();
+	}
+
+	/**
+	 * @param userAuthTokenEntity
+	 * @param userid
+	 * @return List<Question>
+	 * @throws UserNotFoundException
+	 */
+	public List<Question> getAllQuestionsByUser(UserAuth userAuthTokenEntity, int userid)
+			throws UserNotFoundException {
+		List<Question> listOfQuestions = questionDao.getQuestionsByUser(userid);
+		if (listOfQuestions == null) {
+			throw new UserNotFoundException("USR-001",
+					"User with entered uuid whose question details are to be seen does not exist");
+		}
+		return listOfQuestions;
 	}
 
 }

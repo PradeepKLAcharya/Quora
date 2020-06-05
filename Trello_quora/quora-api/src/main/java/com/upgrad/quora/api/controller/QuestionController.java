@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,10 +18,12 @@ import com.upgrad.quora.api.model.QuestionDetailsResponse;
 import com.upgrad.quora.api.model.QuestionRequest;
 import com.upgrad.quora.api.model.QuestionResponse;
 import com.upgrad.quora.service.business.QuestionService;
+import com.upgrad.quora.service.business.UserBusinessService;
 import com.upgrad.quora.service.dao.UserDao;
 import com.upgrad.quora.service.entity.Question;
 import com.upgrad.quora.service.entity.UserAuth;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
+import com.upgrad.quora.service.exception.UserNotFoundException;
 
 /**
  * @author Avinash
@@ -28,7 +31,7 @@ import com.upgrad.quora.service.exception.AuthorizationFailedException;
  */
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/question")
 public class QuestionController {
 
 	@Autowired
@@ -37,13 +40,16 @@ public class QuestionController {
 	@Autowired
 	private UserDao userDao;
 
+	@Autowired
+	private UserBusinessService userBusinessService;
+
 	/**
 	 * @param questionRequest
 	 * @param authorization
 	 * @return ResponseEntity<QuestionResponse>
 	 * @throws AuthorizationFailedException
 	 */
-	@RequestMapping(method = RequestMethod.POST, path = "/question/create", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(method = RequestMethod.POST, path = "/create", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<QuestionResponse> createQuestion(final QuestionRequest questionRequest,
 			@RequestHeader("authorization") final String authorization) throws AuthorizationFailedException {
 
@@ -67,14 +73,35 @@ public class QuestionController {
 	 * @return ResponseEntity<List<QuestionDetailsResponse>>
 	 * @throws AuthorizationFailedException
 	 */
-	@RequestMapping(method = RequestMethod.GET, path = "/question", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(method = RequestMethod.GET, path = "/all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<QuestionDetailsResponse>> getAllQuestions(
 			@RequestHeader("authorization") final String authorization) throws AuthorizationFailedException {
 		UserAuth userAuthTokenEntity = userDao.getUserAuthToken(authorization);
 		validateAuthToken(userAuthTokenEntity);
-		
+
 		List<Question> listOfQuestions = questionService.getAllQuestions(userAuthTokenEntity);
 
+		List<QuestionDetailsResponse> questionDetailsResponse = getCustomizedQuestionResponse(listOfQuestions);
+
+		return new ResponseEntity<>(questionDetailsResponse, HttpStatus.OK);
+	}
+
+	/**
+	 * @param authorization
+	 * @param userUuid
+	 * @return ResponseEntity<List<QuestionDetailsResponse>>
+	 * @throws AuthorizationFailedException
+	 * @throws UserNotFoundException
+	 */
+	@RequestMapping(method = RequestMethod.GET, path = "/all/{userId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<QuestionDetailsResponse>> getQuestionsByUser(
+			@RequestHeader("authorization") final String authorization, @PathVariable("userId") final String userUuid)
+			throws AuthorizationFailedException, UserNotFoundException {
+
+		UserAuth userAuthTokenEntity = userDao.getUserAuthToken(authorization);
+		validateAuthToken(userAuthTokenEntity);
+		List<Question> listOfQuestions = questionService.getAllQuestionsByUser(userAuthTokenEntity,
+				userBusinessService.getUser(userUuid, authorization).getId());
 		List<QuestionDetailsResponse> questionDetailsResponse = getCustomizedQuestionResponse(listOfQuestions);
 
 		return new ResponseEntity<>(questionDetailsResponse, HttpStatus.OK);

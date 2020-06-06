@@ -4,6 +4,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,10 +16,11 @@ import java.time.ZonedDateTime;
 @Entity
 @Table(name = "question", schema = "public")
 @NamedQueries(
-        {
-        	@NamedQuery(name = "allQuestions", query = "select q from Question q "),
-            @NamedQuery(name = "questionsByUser", query = "select q from Question q where q.user.id = :qid")
-    }
+		{
+				@NamedQuery(name = "allQuestions", query = "select q from Question q "),
+				@NamedQuery(name = "questionsByUser", query = "select q from Question q where q.user.id = :qid"),
+				@NamedQuery(name = "getQuestionById", query = "select q from Question q where q.uuid=:uuid")
+		}
 )
 public class Question implements Serializable {
 	@Id
@@ -40,6 +43,11 @@ public class Question implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "USER_ID")
 	private Users user;
+
+	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn(name = "USER_ID")
+	private Users users;
 
 	public Integer getId() {
 		return id;

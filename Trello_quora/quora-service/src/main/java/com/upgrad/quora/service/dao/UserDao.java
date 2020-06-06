@@ -1,7 +1,7 @@
 package com.upgrad.quora.service.dao;
 
-import com.upgrad.quora.service.entity.UserAuth;
-import com.upgrad.quora.service.entity.Users;
+import com.upgrad.quora.service.entity.UserAuthEntity;
+import com.upgrad.quora.service.entity.UsersEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,50 +13,50 @@ public class UserDao {
     @Autowired
     private EntityManager entityManager;
 
-    public Users createUsers(Users userEntity){
+    public UsersEntity createUsers(UsersEntity userEntity){
         entityManager.persist((userEntity));
         return userEntity;
     }
 
-    public Users getUserByEmail(final String email){
+    public UsersEntity getUserByEmail(final String email){
         try {
-            return entityManager.createNamedQuery("userByEmail", Users.class).setParameter("email", email)
+            return entityManager.createNamedQuery("userByEmail", UsersEntity.class).setParameter("email", email)
                     .getSingleResult();
         } catch (NoResultException nre) {
             return null;
         }
     }
 
-    public Users getUserByUserName(final String userName){
+    public UsersEntity getUserByUserName(final String userName){
         try {
-            return entityManager.createNamedQuery("userByUserName", Users.class).setParameter("username", userName)
+            return entityManager.createNamedQuery("userByUserName", UsersEntity.class).setParameter("username", userName)
                     .getSingleResult();
         } catch (NoResultException nre) {
             return null;
         }
     }
 
-    public UserAuth createAuthToken(final UserAuth userAuthTokenEntity){
+    public UserAuthEntity createAuthToken(final UserAuthEntity userAuthTokenEntity){
         entityManager.persist(userAuthTokenEntity);
         return userAuthTokenEntity;
     }
 
-    public UserAuth getUserAuthToken(String token) {
+    public UserAuthEntity getUserAuthToken(String token) {
         try {
-            return entityManager.createNamedQuery("userByAuthToken", UserAuth.class).setParameter("accessToken", token)
+            return entityManager.createNamedQuery("userByAuthToken", UserAuthEntity.class).setParameter("accessToken", token)
                     .getSingleResult();
         } catch (NoResultException nre) {
             return null;
         }
     }
     
-    public void updateUserEntity(UserAuth userEntity) {
+    public void updateUserEntity(UserAuthEntity userEntity) {
         entityManager.merge(userEntity);
     }
 
-    public Users getUser(String Uuid) {
+    public UsersEntity getUser(String Uuid) {
         try {
-            return entityManager.createNamedQuery("userByUuid", Users.class).setParameter("uuid", Uuid).getSingleResult();
+            return entityManager.createNamedQuery("userByUuid", UsersEntity.class).setParameter("uuid", Uuid).getSingleResult();
         }catch (NoResultException nre)
         {
             return null;
@@ -65,10 +65,10 @@ public class UserDao {
     }
 
     //add transactional?
-    public Users deleteUser(String userUuid) {
-        Users user;
+    public UsersEntity deleteUser(String userUuid) {
+        UsersEntity user;
         try {
-            user = entityManager.createNamedQuery("userByUuid", Users.class).setParameter("uuid", userUuid).getSingleResult();
+            user = entityManager.createNamedQuery("userByUuid", UsersEntity.class).setParameter("uuid", userUuid).getSingleResult();
         }catch (NoResultException nre)
         {
             return null;

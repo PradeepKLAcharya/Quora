@@ -1,8 +1,8 @@
 package com.upgrad.quora.service.business;
 
 import com.upgrad.quora.service.dao.UserDao;
-import com.upgrad.quora.service.entity.UserAuth;
-import com.upgrad.quora.service.entity.Users;
+import com.upgrad.quora.service.entity.UserAuthEntity;
+import com.upgrad.quora.service.entity.UsersEntity;
 import com.upgrad.quora.service.exception.AuthenticationFailedException;
 import com.upgrad.quora.service.exception.SignOutRestrictedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +23,8 @@ public class AuthenticationService {
     private PasswordCryptographyProvider cryptographyProvider;
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public UserAuth authenticate(final String username, final String password) throws AuthenticationFailedException {
-        Users userEntity = userDao.getUserByUserName(username);
+    public UserAuthEntity authenticate(final String username, final String password) throws AuthenticationFailedException {
+        UsersEntity userEntity = userDao.getUserByUserName(username);
         if(userEntity == null){
             throw new AuthenticationFailedException("ATH-001", "This username does not exist");
         }
@@ -32,7 +32,7 @@ public class AuthenticationService {
         final String encryptedPassword = cryptographyProvider.encrypt(password, userEntity.getSalt());
         if(encryptedPassword.equals(userEntity.getPassword())){
             JwtTokenProvider jwtTokenProvider = new JwtTokenProvider(encryptedPassword);
-            UserAuth userAuthToken = new UserAuth();
+            UserAuthEntity userAuthToken = new UserAuthEntity();
             userAuthToken.setUser(userEntity);
             final ZonedDateTime now = ZonedDateTime.now();
             final ZonedDateTime expiresAt = now.plusHours(8);
@@ -53,8 +53,8 @@ public class AuthenticationService {
 
     //todo: change name as authenticate and logout
     @Transactional(propagation = Propagation.REQUIRED)
-    public UserAuth authenticateBearer(String token) throws SignOutRestrictedException {
-        UserAuth  userEntity = userDao.getUserAuthToken(token);
+    public UserAuthEntity authenticateBearer(String token) throws SignOutRestrictedException {
+        UserAuthEntity  userEntity = userDao.getUserAuthToken(token);
         if(userEntity == null){
             throw new SignOutRestrictedException("SGR-001","User is not Signed in");
         }

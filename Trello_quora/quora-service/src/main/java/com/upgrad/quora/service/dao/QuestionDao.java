@@ -1,6 +1,6 @@
 package com.upgrad.quora.service.dao;
 
-import com.upgrad.quora.service.entity.Question;
+import com.upgrad.quora.service.entity.QuestionEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,30 +13,30 @@ public class QuestionDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Question createQuestion(Question questionEntity) {
+    public QuestionEntity createQuestion(QuestionEntity questionEntity) {
         entityManager.persist(questionEntity);
         return questionEntity;
     }
 
-    public Question getQuestionByQUuid(final String uuid) {
+    public QuestionEntity getQuestionByQUuid(final String uuid) {
         try {
-            return entityManager.createNamedQuery("getQuestionById", Question.class).setParameter("uuid", uuid).getSingleResult();
+            return entityManager.createNamedQuery("getQuestionById", QuestionEntity.class).setParameter("uuid", uuid).getSingleResult();
         } catch (NoResultException nre) {
             return null;
         }
     }
 
-    public List < Question > getAllQuestionsByUser(final String uuid) {
+    public List < QuestionEntity > getAllQuestionsByUser(final String uuid) {
         try {
-            return entityManager.createNamedQuery("allQuestionsByUserId", Question.class).setParameter("uuid", uuid).getResultList();
+            return entityManager.createNamedQuery("allQuestionsByUserId", QuestionEntity.class).setParameter("uuid", uuid).getResultList();
         } catch (NoResultException nre) {
             return null;
         }
     }
 
-    public List < Question > getAllQuestions() {
+    public List < QuestionEntity > getAllQuestions() {
         try {
-            return entityManager.createNamedQuery("allQuestions", Question.class).getResultList();
+            return entityManager.createNamedQuery("allQuestions", QuestionEntity.class).getResultList();
         } catch (NoResultException nre) {
 
             return null;
@@ -45,7 +45,7 @@ public class QuestionDao {
 
 
     public void deleteQuestion(final String uuid) {
-        Question questionEntity = getQuestionByQUuid(uuid);
+        QuestionEntity questionEntity = getQuestionByQUuid(uuid);
         entityManager.remove(questionEntity);
     }
 
@@ -54,9 +54,9 @@ public class QuestionDao {
 		/**
 	 * @return List<Question>
 	 */
-	public List<Question> getQuestions() {
+	public List<QuestionEntity> getQuestions() {
 		try {
-			return entityManager.createNamedQuery("allQuestions", Question.class).getResultList();
+			return entityManager.createNamedQuery("allQuestions", QuestionEntity.class).getResultList();
 		} catch (NoResultException nre) {
 			return null;
 		}
@@ -66,9 +66,9 @@ public class QuestionDao {
 	 * @param userid
 	 * @return List<Question>
 	 */
-	public List<Question> getQuestionsByUser(Integer userid) {
+	public List<QuestionEntity> getQuestionsByUser(Integer userid) {
 		try {
-			return entityManager.createNamedQuery("questionsByUser", Question.class).setParameter("qid", userid)
+			return entityManager.createNamedQuery("questionsByUser", QuestionEntity.class).setParameter("qid", userid)
 					.getResultList();
 		} catch (NoResultException nre) {
 			return null;
@@ -80,7 +80,7 @@ public class QuestionDao {
 	 *
 	 * @param questionEntity question entity to be updated.
 	 */
-	public Question updateQuestion(final Question questionEntity) {
+	public QuestionEntity updateQuestion(final QuestionEntity questionEntity) {
 		return entityManager.merge(questionEntity);
 	}
 		/**
@@ -89,9 +89,9 @@ public class QuestionDao {
 	 * @param questionId id of the required question.
 	 * @return Question if question with given id is found else null.
 	 */
-	public Question getQuestionById(final String questionId) {
+	public QuestionEntity getQuestionById(final String questionId) {
 		try {
-			return entityManager.createNamedQuery("getQuestionById", Question.class).setParameter("uuid", questionId).getSingleResult();
+			return entityManager.createNamedQuery("getQuestionById", QuestionEntity.class).setParameter("uuid", questionId).getSingleResult();
 		} catch (NoResultException nre) {
 			return null;
 		}
@@ -99,9 +99,9 @@ public class QuestionDao {
 	/**
 	 * Delete the question
 	 *
-	 * @param Question question entity to be deleted.
+	 * @param QuestionEntity question entity to be deleted.
 	 */
-	public Question deleteQuestion(Question questionEntity) {
+	public QuestionEntity deleteQuestion(QuestionEntity questionEntity) {
 
 		entityManager.remove(questionEntity);
 		return questionEntity;

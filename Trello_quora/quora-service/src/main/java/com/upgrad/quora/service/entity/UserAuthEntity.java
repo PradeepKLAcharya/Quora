@@ -18,7 +18,7 @@ import java.time.ZonedDateTime;
                 @NamedQuery(name = "userByAuthToken", query = "select u from UserAuth u where u.accessToken = :accessToken")
         })
 
-public class UserAuth implements Serializable {
+public class UserAuthEntity implements Serializable {
 
     @Id
     @Column(name = "ID")
@@ -27,7 +27,7 @@ public class UserAuth implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
-    private Users user;
+    private UsersEntity user;
 
     @Column(name = "ACCESS_TOKEN")
     @NotNull
@@ -66,11 +66,11 @@ public class UserAuth implements Serializable {
         this.id = id;
     }
 
-    public Users getUser() {
+    public UsersEntity getUser() {
         return user;
     }
 
-    public void setUser(Users user) {
+    public void setUser(UsersEntity user) {
         this.user = user;
     }
 

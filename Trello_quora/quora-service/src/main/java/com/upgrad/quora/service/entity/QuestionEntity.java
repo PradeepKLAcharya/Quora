@@ -22,7 +22,7 @@ import java.time.ZonedDateTime;
 				@NamedQuery(name = "getQuestionById", query = "select q from Question q where q.uuid=:uuid")
 		}
 )
-public class Question implements Serializable {
+public class QuestionEntity implements Serializable {
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +43,7 @@ public class Question implements Serializable {
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "USER_ID")
-	private Users user;
+	private UsersEntity user;
 
 /*	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -82,11 +82,11 @@ public class Question implements Serializable {
 		this.date = date;
 	}
 
-	public Users getUser() {
+	public UsersEntity getUser() {
 		return user;
 	}
 
-	public void setUser(Users user) {
+	public void setUser(UsersEntity user) {
 		this.user = user;
 	}
 

@@ -1,8 +1,8 @@
 package com.upgrad.quora.service.business;
 
 import com.upgrad.quora.service.dao.UserDao;
-import com.upgrad.quora.service.entity.UserAuth;
-import com.upgrad.quora.service.entity.Users;
+import com.upgrad.quora.service.entity.UserAuthEntity;
+import com.upgrad.quora.service.entity.UsersEntity;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
 import com.upgrad.quora.service.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,8 @@ public class AdminBusinessService {
     private UserDao userDao;
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public Users deleteUser(String userUuid, String authorization) throws AuthorizationFailedException, UserNotFoundException {
-        UserAuth userAuthTokenEntity = userDao.getUserAuthToken(authorization);
+    public UsersEntity deleteUser(String userUuid, String authorization) throws AuthorizationFailedException, UserNotFoundException {
+        UserAuthEntity userAuthTokenEntity = userDao.getUserAuthToken(authorization);
         if(userAuthTokenEntity == null)
         {
             throw new AuthorizationFailedException("ATHR-001","User has not signed in");
@@ -35,7 +35,7 @@ public class AdminBusinessService {
             throw new AuthorizationFailedException("ATHR-003","Unauthorized Access, Entered user is not an admin");
         }
 
-        Users userEntity =  userDao.getUser(userUuid);
+        UsersEntity userEntity =  userDao.getUser(userUuid);
         if(userEntity == null){
             throw new UserNotFoundException("USR-001","User with entered uuid to be deleted does not exist");
         }

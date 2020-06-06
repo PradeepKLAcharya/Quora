@@ -2,9 +2,9 @@ package com.upgrad.quora.service.business;
 
 import com.upgrad.quora.service.dao.AnswerDao;
 import com.upgrad.quora.service.dao.UserDao;
-import com.upgrad.quora.service.entity.Answer;
-import com.upgrad.quora.service.entity.UserAuth;
-import com.upgrad.quora.service.entity.Users;
+import com.upgrad.quora.service.entity.AnswerEntity;
+import com.upgrad.quora.service.entity.UserAuthEntity;
+import com.upgrad.quora.service.entity.UsersEntity;
 import com.upgrad.quora.service.exception.AnswerNotFoundException;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,8 @@ public class EditAnswerBusinessService {
     private UserDao userDao;
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public Answer editAnswerContent(final Answer answerEntity, final String authorization) throws AuthorizationFailedException, AnswerNotFoundException {
-        UserAuth userAuthEntity = userDao.getUserAuthToken(authorization);
+    public AnswerEntity editAnswerContent(final AnswerEntity answerEntity, final String authorization) throws AuthorizationFailedException, AnswerNotFoundException {
+        UserAuthEntity userAuthEntity = userDao.getUserAuthToken(authorization);
 
         // Validate if user is signed in or not
         if (userAuthEntity == null) {
@@ -36,14 +36,14 @@ public class EditAnswerBusinessService {
         }
 
         // Validate if requested answer exist or not
-        Answer existingAnswerEntity = answerDao.getAnswerByUuid(answerEntity.getUuid());
+        AnswerEntity existingAnswerEntity = answerDao.getAnswerByUuid(answerEntity.getUuid());
         if (existingAnswerEntity == null) {
             throw new AnswerNotFoundException("ANS-001", "Entered answer uuid does not exist");
         }
 
         // Validate if current user is the owner of requested answer
-        Users currentUser = userAuthEntity.getUser();
-        Users answerOwner = answerDao.getAnswerByUuid(answerEntity.getUuid()).getUser();
+        UsersEntity currentUser = userAuthEntity.getUser();
+        UsersEntity answerOwner = answerDao.getAnswerByUuid(answerEntity.getUuid()).getUser();
         if (currentUser.getId() != answerOwner.getId()) {
             throw new AuthorizationFailedException("ATHR-003", "Only the answer owner can edit the answer");
         }

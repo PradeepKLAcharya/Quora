@@ -12,6 +12,13 @@ import java.io.Serializable;
 import java.time.ZonedDateTime;
 @Entity
 @Table(name = "answer", schema = "public")
+@NamedQueries(
+        {
+                @NamedQuery(name = "answerEntityByUuid", query = "select ae from Answer ae where ae.uuid = :uuid"),
+                @NamedQuery(name = "answersByQuestionId", query = "select ae from Answer ae inner join ae" +
+                        ".question qn where qn.uuid = :uuid"),
+        }
+)
 public class Answer implements Serializable {
 
     @Id
@@ -20,6 +27,7 @@ public class Answer implements Serializable {
     private Integer id;
 
     @Column(name = "UUID")
+    @NotNull
     @Size(max = 64)
     private String uuid;
 
@@ -28,20 +36,8 @@ public class Answer implements Serializable {
     @Size(max = 200)
     private String ans;
 
-    @Column(name = "ROLE")
-    @NotNull
-    @Size(max = 200)
-    private String role;
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     @Column(name = "DATE")
+    @NotNull
     private ZonedDateTime date;
 
     @ManyToOne
@@ -51,6 +47,20 @@ public class Answer implements Serializable {
     @OneToOne
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
+
+    @Column(name = "ROLE")
+    @NotNull
+    @Size(max = 200)
+    private String role;
+
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public Integer getId() {
         return id;

@@ -109,3 +109,8 @@ Trello_quora/quora-api/target/surefire-reports/TEST-com.upgrad.quora.api.control
 Trello_quora/quora-api/target/surefire-reports/TEST-com.upgrad.quora.api.controller.CommonControllerTest.xml
 Trello_quora/quora-api/target/surefire-reports/TEST-com.upgrad.quora.api.controller.UserControllerTest.xml
 
+Trello_quora/quora-api/target/surefire-reports/com.upgrad.quora.api.controller.AnswerControllerTest.txt
+Trello_quora/quora-api/target/classes/pom.xml
+Trello_quora/quora-api/target/surefire-reports/TEST-com.upgrad.quora.api.controller.AnswerControllerTest.xml
+*.txt
+Trello_quora/quora-api/target/surefire-reports/TEST-com.upgrad.quora.api.controller.AnswerControllerTest.xml

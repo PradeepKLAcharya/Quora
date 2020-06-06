@@ -1,46 +1,28 @@
 -------------------------------------------------------------------------------
 Test set: com.upgrad.quora.api.controller.AnswerControllerTest
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 7, Skipped: 0, Time elapsed: 5.654 s <<< FAILURE! - in com.upgrad.quora.api.controller.AnswerControllerTest
-editAnswerWithNonExistingAccessToken(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.002 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-Caused by: org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
+Tests run: 7, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.215 s <<< FAILURE! - in com.upgrad.quora.api.controller.AnswerControllerTest
+editAnswerWithoutOwnership(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.028 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
+Caused by: org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
+Caused by: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
+Caused by: org.postgresql.util.PSQLException: 
+ERROR: column answer0_.role does not exist
+  Position: 121
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
 
-createAnswerForNonExistingQuestion(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.001 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-Caused by: org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-
-editAnswerWithoutOwnership(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-Caused by: org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-
-editAnswerWithSignedOutUser(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.001 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-Caused by: org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-
-createAnswerWithNonExistingAccessToken(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-Caused by: org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-
-createAnswerWithSignedOutUser(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-Caused by: org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-
-editNonExistingAnswer(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
-Caused by: org.hibernate.MappingException: Repeated column in mapping for entity: com.upgrad.quora.service.entity.Question column: user_id (should be mapped with insert="false" update="false")
+editNonExistingAnswer(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.02 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
+Caused by: org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
+Caused by: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
+Caused by: org.postgresql.util.PSQLException: 
+ERROR: column answer0_.role does not exist
+  Position: 121
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
 

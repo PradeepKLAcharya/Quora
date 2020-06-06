@@ -41,14 +41,15 @@ public class Question implements Serializable {
 	private ZonedDateTime date;
 
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "USER_ID")
 	private Users user;
 
-	@ManyToOne
+/*	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "USER_ID")
 	private Users users;
-
+*/
 	public Integer getId() {
 		return id;
 	}

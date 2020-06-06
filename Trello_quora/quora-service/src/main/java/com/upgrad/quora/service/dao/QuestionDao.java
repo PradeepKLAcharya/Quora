@@ -53,4 +53,38 @@ public class QuestionDao {
 			return null;
 		}
 	}
+
+	/**
+	 * Get the question for the given id.
+	 *
+	 * @param questionId id of the required question.
+	 * @return QuestionEntity if question with given id is found else null.
+	 */
+	public QuestionEntity getQuestionById(final String questionId) {
+		try {
+			return entityManager.createNamedQuery("getQuestionById", QuestionEntity.class).setParameter("uuid", questionId).getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
+	}
+
+	/**
+	 * Update the question
+	 *
+	 * @param questionEntity question entity to be updated.
+	 */
+	public void updateQuestion(QuestionEntity questionEntity) {
+		entityManager.merge(questionEntity);
+	}
+
+	/**
+	 * Delete the question
+	 *
+	 * @param questionEntity question entity to be deleted.
+	 */
+	public QuestionEntity deleteQuestion(QuestionEntity questionEntity) {
+
+		entityManager.remove(questionEntity);
+		return questionEntity;
+	}
 }

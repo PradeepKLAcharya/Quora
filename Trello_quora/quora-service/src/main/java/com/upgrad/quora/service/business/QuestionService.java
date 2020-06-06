@@ -1,17 +1,18 @@
 package com.upgrad.quora.service.business;
 
-import java.util.List;
-
+import com.upgrad.quora.service.dao.QuestionDao;
+import com.upgrad.quora.service.dao.UserDao;
+import com.upgrad.quora.service.entity.Question;
+import com.upgrad.quora.service.entity.UserAuth;
+import com.upgrad.quora.service.exception.AuthorizationFailedException;
+import com.upgrad.quora.service.exception.InvalidQuestionException;
+import com.upgrad.quora.service.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.upgrad.quora.service.dao.QuestionDao;
-import com.upgrad.quora.service.entity.Question;
-import com.upgrad.quora.service.entity.UserAuth;
-import com.upgrad.quora.service.exception.AuthorizationFailedException;
-import com.upgrad.quora.service.exception.UserNotFoundException;
+import java.util.List;
 
 /**
  * @author Avinash
@@ -23,6 +24,9 @@ public class QuestionService {
 
 	@Autowired
 	private QuestionDao questionDao;
+
+	@Autowired
+	private UserDao userDao;
 
 	/**
 	 * @param question
@@ -72,7 +76,7 @@ public class QuestionService {
 	 */
 	@Transactional
 	public Question editQuestion(final String accessToken, final String questionId, final String content) throws AuthorizationFailedException, InvalidQuestionException {
-		UserAuth userAuthEntity = userDao.getUserAuthByToken(accessToken);
+		UserAuth userAuthEntity = userDao.getUserAuthToken(accessToken);
 		if (userAuthEntity == null) {
 			throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
 		} else if (userAuthEntity.getLogoutAt() != null) {
@@ -82,7 +86,7 @@ public class QuestionService {
 		if (questionEntity == null) {
 			throw new InvalidQuestionException("QUES-001", "Entered question uuid does not exist");
 		}
-		if (!questionEntity.getUserEntity().getUuid().equals(userAuthEntity.getUserEntity().getUuid())) {
+		if (!questionEntity.getUser().getUuid().equals(userAuthEntity.getUser().getUuid())) {
 			throw new AuthorizationFailedException("ATHR-003", "Only the question owner can edit the question");
 		}
 		questionEntity.setContent(content);
@@ -93,16 +97,16 @@ public class QuestionService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Question deleteQuestion(String questUuid, String token) throws AuthorizationFailedException, InvalidQuestionException {
 
-		UserAuth userAuthEntity = userDao.getUserAuthByToken(token);
+		UserAuth userAuthEntity = userDao.getUserAuthToken(token);
 		if (userAuthEntity == null) {
 			throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
 		}
 
-		if (userAuthEntity.getLogoutAt() != null && userAuth.getLogoutAt().isAfter(userAuthEntity.getLoginAt())) {
+		if (userAuthEntity.getLogoutAt() != null && userAuthEntity.getLogoutAt().isAfter(userAuthEntity.getLoginAt())) {
 			throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to delete the question");
 		}
 
-		Question questionEntity = questionDao.getQuestionByUuid(questUuid);
+		Question questionEntity = questionDao.getQuestionById(questUuid);
 
 		if (questionEntity == null) {
 			throw new InvalidQuestionException("QUES-001", "Entered question uuid does not exist");
@@ -116,4 +120,4 @@ public class QuestionService {
 	}
 
 }
-}
+

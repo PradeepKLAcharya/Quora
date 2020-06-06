@@ -20,7 +20,7 @@ public class QuestionDao {
 
     public Question getQuestionByQUuid(final String uuid) {
         try {
-            return entityManager.createNamedQuery("questionByQUuid", Question.class).setParameter("uuid", uuid).getSingleResult();
+            return entityManager.createNamedQuery("getQuestionById", Question.class).setParameter("uuid", uuid).getSingleResult();
         } catch (NoResultException nre) {
             return null;
         }
@@ -42,22 +42,14 @@ public class QuestionDao {
             return null;
         }
     }
-    public Question updateQuestion(final Question questionEntity) {
-        return entityManager.merge(questionEntity);
-    }
+
 
     public void deleteQuestion(final String uuid) {
         Question questionEntity = getQuestionByQUuid(uuid);
         entityManager.remove(questionEntity);
     }
 
-    public Question getQuestionById(String questionId) {
-        try {
-            return entityManager.createNamedQuery("questionById", Question.class).setParameter("uuid", questionId).getSingleResult();
-        } catch (NoResultException nre) {
-            return null;
-        }
-    }
+
 
 		/**
 	 * @return List<Question>
@@ -88,10 +80,9 @@ public class QuestionDao {
 	 *
 	 * @param questionEntity question entity to be updated.
 	 */
-	public void updateQuestion(Question questionEntity) {
-		entityManager.merge(questionEntity);
+	public Question updateQuestion(final Question questionEntity) {
+		return entityManager.merge(questionEntity);
 	}
-
 		/**
 	 * Get the question for the given id.
 	 *
@@ -115,4 +106,6 @@ public class QuestionDao {
 		entityManager.remove(questionEntity);
 		return questionEntity;
 	}
+
 }
+

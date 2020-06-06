@@ -4,7 +4,8 @@ import com.upgrad.quora.api.model.SigninResponse;
 import com.upgrad.quora.api.model.SignoutResponse;
 import com.upgrad.quora.api.model.SignupUserRequest;
 import com.upgrad.quora.api.model.SignupUserResponse;
-import com.upgrad.quora.service.business.AuthenticationService;
+import com.upgrad.quora.service.business.SigninBusinessService;
+import com.upgrad.quora.service.business.SignoutBusinessService;
 import com.upgrad.quora.service.business.SignupBusinessService;
 import com.upgrad.quora.service.entity.UserAuth;
 import com.upgrad.quora.service.entity.Users;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.ZonedDateTime;
 import java.util.Base64;
 import java.util.UUID;
 
@@ -33,15 +33,20 @@ public class UserController {
     private SignupBusinessService signupBusinessService;
 
     @Autowired
-    private AuthenticationService authenticationService;
+    private SigninBusinessService signinBusinessService;
+
+    @Autowired
+    private SignoutBusinessService signoutBusinessService;
 
     @RequestMapping(method= RequestMethod.POST, path="/user/signup", consumes= MediaType.APPLICATION_JSON_UTF8_VALUE, produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SignupUserResponse> signup(final SignupUserRequest signupUserRequest) throws SignUpRestrictedException {
+
         final Users userEntity = new Users();
+
         userEntity.setUuid(UUID.randomUUID().toString());
         userEntity.setAboutme(signupUserRequest.getAboutMe());
         userEntity.setCountry(signupUserRequest.getCountry());
-        userEntity.setDob(ZonedDateTime.now()); //todo: Convert the datatime string to zonedtime
+        userEntity.setDob(signupUserRequest.getDob());
         userEntity.setFirstName(signupUserRequest.getFirstName());
         userEntity.setLastName(signupUserRequest.getLastName());
         userEntity.setEmail(signupUserRequest.getEmailAddress());
@@ -62,7 +67,7 @@ public class UserController {
         String decodedText = new String(decode);
         String[] decodedArray = decodedText.split(":");
 
-        UserAuth userAuthToken = authenticationService.authenticate(decodedArray[0],decodedArray[1]);
+        UserAuth userAuthToken = signinBusinessService.authenticate(decodedArray[0],decodedArray[1]);
         Users user = userAuthToken.getUser();
 
         SigninResponse authorizedUserResponse =  new SigninResponse().id(user.getUuid()).message("SIGNED IN SUCCESSFULLY");
@@ -75,10 +80,19 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, path = "user/signout", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SignoutResponse> logout(@RequestHeader("authorization") final String authorization) throws SignOutRestrictedException {
 
-        UserAuth userAuthToken = authenticationService.authenticateBearer(authorization); //todo: see if user has already signed out, not a project requirement as of now
-        Users user = userAuthToken.getUser();
 
-        SignoutResponse authorizedUserResponse =  new SignoutResponse().id(user.getUuid()).message("SIGNED OUT SUCCESSFULLY");
+        String bearerToken = null;
+        try {
+            bearerToken = authorization.split("Bearer ")[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            bearerToken = authorization;
+        }
+
+        UserAuth userAuthToken; //todo: see if user has already signed out, not a project requirement as of now
+        userAuthToken = signoutBusinessService.signOutService(bearerToken);
+        //Users user = userAuthToken.getUser();
+
+            SignoutResponse authorizedUserResponse =  new SignoutResponse().id(userAuthToken.getUuid()).message("SIGNED OUT SUCCESSFULLY");
 
         return new ResponseEntity<SignoutResponse>(authorizedUserResponse, HttpStatus.OK);
     }

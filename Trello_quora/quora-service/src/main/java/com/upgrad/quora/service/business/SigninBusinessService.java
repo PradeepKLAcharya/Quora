@@ -14,7 +14,7 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Service
-public class AuthenticationService {
+public class SigninBusinessService {
 
     @Autowired
     private UserDao userDao;
@@ -49,17 +49,5 @@ public class AuthenticationService {
             throw new AuthenticationFailedException("ATH-002", "Password Failed");
         }
 
-    }
-
-    //todo: change name as authenticate and logout
-    @Transactional(propagation = Propagation.REQUIRED)
-    public UserAuth authenticateBearer(String token) throws SignOutRestrictedException {
-        UserAuth  userEntity = userDao.FindByAuthToken(token);
-        if(userEntity == null){
-            throw new SignOutRestrictedException("SGR-001","User is not Signed in");
-        }
-        userEntity.setLogoutAt(ZonedDateTime.now());
-        userDao.updateUserEntity(userEntity);
-        return  userEntity;
     }
 }

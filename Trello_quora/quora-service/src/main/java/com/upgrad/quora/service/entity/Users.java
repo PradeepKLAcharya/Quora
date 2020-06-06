@@ -16,7 +16,12 @@ import java.time.ZonedDateTime;
         {
                 @NamedQuery(name = "userByUuid", query = "select u from Users u where u.uuid = :uuid"),
                 @NamedQuery(name = "userByEmail", query = "select u from Users u where u.email =:email"),
-                @NamedQuery(name = "userByUserName", query = "select u from Users u where u.username =:username")
+                @NamedQuery(name = "userByUserName", query = "select u from Users u where u.username =:username"),
+                //@NamedQuery(name = "userByEmail", query = "select u from Users u where u.email = :email"),
+                //@NamedQuery(name = "userByUserName", query = "select u from Users u where u.userName = :userName"),
+                //@NamedQuery(name ="userByUuid",query="select u from Users u where u.uuid =:uuid"),
+                @NamedQuery(name ="userByRole",query="select u from Users u where u.role=:role"),
+                @NamedQuery(name = "authenticateUserQuery", query = "select u from Users u where u.username= :username and u.password= :password")
         }
 )
 public class Users implements Serializable {
@@ -27,23 +32,9 @@ public class Users implements Serializable {
     private Integer id;
 
     @Column(name = "UUID")
+    @NotNull
     @Size(max = 64)
     private String uuid;
-
-    @Column(name = "EMAIL")
-    @NotNull
-    @Size(max = 200)
-    private String email;
-
-    @Column(name = "USERNAME")
-    @NotNull
-    @Size(max = 200)
-    private String username;
-
-
-    //@ToStringExclude
-    @Column(name = "PASSWORD")
-    private String password;
 
     @Column(name = "FIRSTNAME")
     @NotNull
@@ -55,19 +46,19 @@ public class Users implements Serializable {
     @Size(max = 200)
     private String lastName;
 
-    @Column(name = "COUNTRY")
+    @Column(name = "USERNAME")
     @NotNull
     @Size(max = 200)
-    private String country;
+    private String username;
 
-    @Column(name = "ABOUTME")
+    @Column(name = "EMAIL")
     @NotNull
     @Size(max = 200)
-    private String aboutme;
+    private String email;
 
-    @Column(name = "ROLE")
-    @Size(max = 200)
-    private String role;
+    //@ToStringExclude
+    @Column(name = "PASSWORD")
+    private String password;
 
     @Column(name = "SALT")
     @NotNull
@@ -75,8 +66,23 @@ public class Users implements Serializable {
     //@ToStringExclude
     private String salt;
 
+    @Column(name = "COUNTRY")
+    @NotNull
+    @Size(max = 50)
+    private String country;
+
+    @Column(name = "ABOUTME")
+    @NotNull
+    @Size(max = 50)
+    private String aboutme;
+
     @Column(name = "DOB")
-    private ZonedDateTime dob;
+    @Size(max = 50)
+    private String dob;
+
+    @Column(name = "ROLE")
+    @Size(max = 50)
+    private String role;
 
     @Column(name = "CONTACTNUMBER")
     @NotNull
@@ -171,11 +177,11 @@ public class Users implements Serializable {
         this.salt = salt;
     }
 
-    public ZonedDateTime getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(ZonedDateTime dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 

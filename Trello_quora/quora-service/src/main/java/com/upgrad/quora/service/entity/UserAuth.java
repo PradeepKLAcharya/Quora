@@ -4,6 +4,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,7 +17,9 @@ import java.time.ZonedDateTime;
 @Table(name = "user_auth", schema = "public")
 @NamedQueries(
         {
-                @NamedQuery(name = "userByAuthToken", query = "select u from UserAuth u where u.accessToken = :accessToken")
+                @NamedQuery(name = "userByAuthToken", query = "select u from UserAuth u where u.accessToken = :accessToken"),
+                @NamedQuery(name = "UserByUserUuid", query = "select ut from UserAuth ut where ut.id =:uuid"),
+                @NamedQuery(name = "userAuthTokenByUuid", query = "select ut from UserAuth ut where ut.uuid = :uuid")
         })
 
 public class UserAuth implements Serializable {
@@ -25,7 +29,13 @@ public class UserAuth implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "UUID")
+    @NotNull
+    @Size(max = 200)
+    private String uuid;
+
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "USER_ID")
     private Users user;
 
@@ -33,19 +43,6 @@ public class UserAuth implements Serializable {
     @NotNull
     @Size(max = 500)
     private String accessToken;
-
-    @Column(name = "UUID")
-    @NotNull
-    @Size(max = 500)
-    private String uuid;
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
 
     @Column(name = "LOGIN_AT")
     @NotNull
@@ -57,6 +54,16 @@ public class UserAuth implements Serializable {
 
     @Column(name = "LOGOUT_AT")
     private ZonedDateTime logoutAt;
+
+
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public Integer getId() {
         return id;

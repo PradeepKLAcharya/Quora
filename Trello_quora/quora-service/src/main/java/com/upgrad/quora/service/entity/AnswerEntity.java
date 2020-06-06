@@ -19,7 +19,7 @@ import java.time.ZonedDateTime;
                         ".question qn where qn.uuid = :uuid"),
         }
 )
-public class Answer implements Serializable {
+public class AnswerEntity implements Serializable {
 
     @Id
     @Column(name = "ID")
@@ -42,11 +42,11 @@ public class Answer implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
-    private Users user;
+    private UsersEntity user;
 
     @OneToOne
     @JoinColumn(name = "QUESTION_ID")
-    private Question question;
+    private QuestionEntity question;
 
     @Column(name = "ROLE")
     @NotNull
@@ -94,19 +94,19 @@ public class Answer implements Serializable {
         this.date = date;
     }
 
-    public Users getUser() {
+    public UsersEntity getUser() {
         return user;
     }
 
-    public void setUser(Users user) {
+    public void setUser(UsersEntity user) {
         this.user = user;
     }
 
-    public com.upgrad.quora.service.entity.Question getQuestion() {
+    public com.upgrad.quora.service.entity.QuestionEntity getQuestion() {
         return question;
     }
 
-    public void setQuestion(com.upgrad.quora.service.entity.Question question) {
+    public void setQuestion(com.upgrad.quora.service.entity.QuestionEntity question) {
         this.question = question;
     }
 

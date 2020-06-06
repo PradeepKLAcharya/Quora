@@ -1,7 +1,7 @@
 package com.upgrad.quora.service.business;
 
 import com.upgrad.quora.service.dao.UserDao;
-import com.upgrad.quora.service.entity.Users;
+import com.upgrad.quora.service.entity.UsersEntity;
 import com.upgrad.quora.service.exception.SignUpRestrictedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class SignupBusinessService {
     private PasswordCryptographyProvider cryptographyProvider;
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public Users signup(Users userEntity) throws SignUpRestrictedException{
+    public UsersEntity signup(UsersEntity userEntity) throws SignUpRestrictedException{
 
         if(userDao.getUserByUserName(userEntity.getUsername()) != null){
             throw new SignUpRestrictedException("SGR-001", "Try any other Username, this Username has already been taken");

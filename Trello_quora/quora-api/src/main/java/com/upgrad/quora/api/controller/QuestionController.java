@@ -22,8 +22,8 @@ import com.upgrad.quora.api.model.QuestionDeleteResponse;
 import com.upgrad.quora.service.business.QuestionService;
 import com.upgrad.quora.service.business.UserBusinessService;
 import com.upgrad.quora.service.dao.UserDao;
-import com.upgrad.quora.service.entity.Question;
-import com.upgrad.quora.service.entity.UserAuth;
+import com.upgrad.quora.service.entity.QuestionEntity;
+import com.upgrad.quora.service.entity.UserAuthEntity;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
 import com.upgrad.quora.service.exception.UserNotFoundException;
 import com.upgrad.quora.service.exception.InvalidQuestionException;
@@ -56,7 +56,7 @@ public class QuestionController {
 	public ResponseEntity<QuestionResponse> createQuestion(final QuestionRequest questionRequest,
 			@RequestHeader("authorization") final String authorization) throws AuthorizationFailedException {
 
-		UserAuth userAuthTokenEntity = userDao.getUserAuthToken(authorization);
+		UserAuthEntity userAuthTokenEntity = userDao.getUserAuthToken(authorization);
 		if (userAuthTokenEntity == null) {
 			throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
 		}
@@ -65,13 +65,13 @@ public class QuestionController {
 			throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to get user details");
 		}
 
-		Question question = new Question();
+		QuestionEntity question = new QuestionEntity();
 		question.setContent(questionRequest.getContent());
 		question.setDate(ZonedDateTime.now());
 		question.setUuid(userAuthTokenEntity.getUuid());
 		question.setUser(userAuthTokenEntity.getUser());
 
-		final Question createdQuestion = questionService.createQuestion(question, userAuthTokenEntity);
+		final QuestionEntity createdQuestion = questionService.createQuestion(question, userAuthTokenEntity);
 		QuestionResponse questionResponse = new QuestionResponse().id(createdQuestion.getUuid())
 				.status("QUESTION CREATED");
 		return new ResponseEntity<QuestionResponse>(questionResponse, HttpStatus.CREATED);
@@ -86,7 +86,7 @@ public class QuestionController {
 	public ResponseEntity<List<QuestionDetailsResponse>> getAllQuestions(
 			@RequestHeader("authorization") final String authorization) throws AuthorizationFailedException {
 
-		List<Question> listOfQuestions = questionService.getAllQuestions(authorization);
+		List<QuestionEntity> listOfQuestions = questionService.getAllQuestions(authorization);
 
 		List<QuestionDetailsResponse> questionDetailsResponse = getCustomizedQuestionResponse(listOfQuestions);
 
@@ -105,16 +105,17 @@ public class QuestionController {
 			@RequestHeader("authorization") final String authorization, @PathVariable("userId") final String userUuid)
 			throws AuthorizationFailedException, UserNotFoundException {
 
-		List<Question> listOfQuestions = questionService.getAllQuestionsByUser(authorization,
+		List<QuestionEntity> listOfQuestions = questionService.getAllQuestionsByUser(authorization,
 				userBusinessService.getUser(userUuid, authorization).getId());
 		List<QuestionDetailsResponse> questionDetailsResponse = getCustomizedQuestionResponse(listOfQuestions);
 
 		return new ResponseEntity<>(questionDetailsResponse, HttpStatus.OK);
 	}
 
-	private List<QuestionDetailsResponse> getCustomizedQuestionResponse(List<Question> listOfQuestions) {
+	// Method which customize the response and provide only the required information.
+	private List<QuestionDetailsResponse> getCustomizedQuestionResponse(List<QuestionEntity> listOfQuestions) {
 		List<QuestionDetailsResponse> questionDetailsResponse = new ArrayList<QuestionDetailsResponse>();
-		for (Question each : listOfQuestions) {
+		for (QuestionEntity each : listOfQuestions) {
 			questionDetailsResponse.add(new QuestionDetailsResponse().id(each.getUuid()).content(each.getContent()));
 		}
 		return questionDetailsResponse;
@@ -135,7 +136,7 @@ public class QuestionController {
 	public ResponseEntity<QuestionResponse> editQuestion(@RequestHeader("authorization") final String accessToken,
 			@PathVariable("questionId") final String questionId, QuestionEditRequest questionEditRequest)
 			throws AuthorizationFailedException, InvalidQuestionException {
-		Question questionEntity = questionService.editQuestion(accessToken, questionId,
+		QuestionEntity questionEntity = questionService.editQuestion(accessToken, questionId,
 				questionEditRequest.getContent());
 		QuestionResponse questionResponse = new QuestionResponse();
 		questionResponse.setId(questionEntity.getUuid());
@@ -159,7 +160,7 @@ public class QuestionController {
 			@PathVariable("questionId") final String questionId)
 			throws AuthorizationFailedException, InvalidQuestionException {
 
-		Question questionEntity = questionService.deleteQuestion(accessToken, questionId);
+		QuestionEntity questionEntity = questionService.deleteQuestion(accessToken, questionId);
 		QuestionDeleteResponse questionDeleteResponse = new QuestionDeleteResponse();
 		questionDeleteResponse.setId(questionEntity.getUuid());
 		questionDeleteResponse.setStatus("QUESTION DELETED");

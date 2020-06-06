@@ -1,6 +1,6 @@
 package com.upgrad.quora.service.dao;
 
-import com.upgrad.quora.service.entity.Answer;
+import com.upgrad.quora.service.entity.AnswerEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,32 +13,32 @@ public class AnswerDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Answer createAnswer(Answer answerEntity) {
+    public AnswerEntity createAnswer(AnswerEntity answerEntity) {
         entityManager.persist(answerEntity);
         return answerEntity;
     }
 
-    public Answer getAnswerByUuid(String questionId) {
+    public AnswerEntity getAnswerByUuid(String questionId) {
         try {
-            return entityManager.createNamedQuery("answerEntityByUuid", Answer.class).setParameter("uuid", questionId).getSingleResult();
+            return entityManager.createNamedQuery("answerEntityByUuid", AnswerEntity.class).setParameter("uuid", questionId).getSingleResult();
         } catch (NoResultException nre) {
 
             return null;
         }
     }
 
-    public Answer editAnswerContent(final Answer answerEntity) {
+    public AnswerEntity editAnswerContent(final AnswerEntity answerEntity) {
         return entityManager.merge(answerEntity);
     }
 
     public void userAnswerDelete(final String answerId) {
-        Answer answerEntity = getAnswerByUuid(answerId);
+        AnswerEntity answerEntity = getAnswerByUuid(answerId);
         entityManager.remove(answerEntity);
     }
 
-    public List < Answer > getAllAnswersToQuestion(final String questionId) {
+    public List < AnswerEntity > getAllAnswersToQuestion(final String questionId) {
         try {
-            return entityManager.createNamedQuery("answersByQuestionId", Answer.class).setParameter("uuid", questionId).getResultList();
+            return entityManager.createNamedQuery("answersByQuestionId", AnswerEntity.class).setParameter("uuid", questionId).getResultList();
         } catch (NoResultException nre) {
             return null;
         }

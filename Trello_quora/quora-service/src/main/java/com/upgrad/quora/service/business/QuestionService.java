@@ -2,8 +2,8 @@ package com.upgrad.quora.service.business;
 
 import com.upgrad.quora.service.dao.QuestionDao;
 import com.upgrad.quora.service.dao.UserDao;
-import com.upgrad.quora.service.entity.Question;
-import com.upgrad.quora.service.entity.UserAuth;
+import com.upgrad.quora.service.entity.QuestionEntity;
+import com.upgrad.quora.service.entity.UserAuthEntity;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
 import com.upgrad.quora.service.exception.InvalidQuestionException;
 import com.upgrad.quora.service.exception.UserNotFoundException;
@@ -35,7 +35,7 @@ public class QuestionService {
 	 * @throws AuthorizationFailedException
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
-	public Question createQuestion(Question question, UserAuth userAuthTokenEntity) {
+	public QuestionEntity createQuestion(QuestionEntity question, UserAuthEntity userAuthTokenEntity) {
 
 		return questionDao.createQuestion(question);
 	}
@@ -45,8 +45,8 @@ public class QuestionService {
 	 * @return List<Question>
 	 * @throws AuthorizationFailedException
 	 */
-	public List<Question> getAllQuestions(String authorization) throws AuthorizationFailedException {
-		UserAuth userAuthTokenEntity = userDao.getUserAuthToken(authorization);
+	public List<QuestionEntity> getAllQuestions(String authorization) throws AuthorizationFailedException {
+		UserAuthEntity userAuthTokenEntity = userDao.getUserAuthToken(authorization);
 		validateAuthFailure(userAuthTokenEntity);
 		return questionDao.getQuestions();
 	}
@@ -58,11 +58,11 @@ public class QuestionService {
 	 * @throws UserNotFoundException
 	 * @throws AuthorizationFailedException
 	 */
-	public List<Question> getAllQuestionsByUser(String authorization, int userid)
+	public List<QuestionEntity> getAllQuestionsByUser(String authorization, int userid)
 			throws UserNotFoundException, AuthorizationFailedException {
-		UserAuth userAuthTokenEntity = userDao.getUserAuthToken(authorization);
+		UserAuthEntity userAuthTokenEntity = userDao.getUserAuthToken(authorization);
 		validateAuthFailure(userAuthTokenEntity);
-		List<Question> listOfQuestions = questionDao.getQuestionsByUser(userid);
+		List<QuestionEntity> listOfQuestions = questionDao.getQuestionsByUser(userid);
 		if (listOfQuestions == null) {
 			throw new UserNotFoundException("USR-001",
 					"User with entered uuid whose question details are to be seen does not exist");
@@ -70,7 +70,7 @@ public class QuestionService {
 		return listOfQuestions;
 	}
 
-	private void validateAuthFailure(UserAuth userAuthTokenEntity) throws AuthorizationFailedException {
+	private void validateAuthFailure(UserAuthEntity userAuthTokenEntity) throws AuthorizationFailedException {
 		if (userAuthTokenEntity == null) {
 			throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
 		}
@@ -93,11 +93,11 @@ public class QuestionService {
 	 * @throws InvalidQuestionException     if the question with id doesn't exist.
 	 */
 	@Transactional
-	public Question editQuestion(final String accessToken, final String questionId, final String content)
+	public QuestionEntity editQuestion(final String accessToken, final String questionId, final String content)
 			throws AuthorizationFailedException, InvalidQuestionException {
-		UserAuth userAuthEntity = userDao.getUserAuthToken(accessToken);
+		UserAuthEntity userAuthEntity = userDao.getUserAuthToken(accessToken);
 		validateAuthFailure(userAuthEntity);
-		Question questionEntity = questionDao.getQuestionById(questionId);
+		QuestionEntity questionEntity = questionDao.getQuestionById(questionId);
 		if (questionEntity == null) {
 			throw new InvalidQuestionException("QUES-001", "Entered question uuid does not exist");
 		}
@@ -110,10 +110,10 @@ public class QuestionService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	public Question deleteQuestion(String questUuid, String token)
+	public QuestionEntity deleteQuestion(String questUuid, String token)
 			throws AuthorizationFailedException, InvalidQuestionException {
 
-		UserAuth userAuthEntity = userDao.getUserAuthToken(token);
+		UserAuthEntity userAuthEntity = userDao.getUserAuthToken(token);
 		if (userAuthEntity == null) {
 			throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
 		}
@@ -123,7 +123,7 @@ public class QuestionService {
 					"User is signed out.Sign in first to delete the question");
 		}
 
-		Question questionEntity = questionDao.getQuestionById(questUuid);
+		QuestionEntity questionEntity = questionDao.getQuestionById(questUuid);
 
 		if (questionEntity == null) {
 			throw new InvalidQuestionException("QUES-001", "Entered question uuid does not exist");

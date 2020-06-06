@@ -18,7 +18,7 @@ import java.io.Serializable;
                 @NamedQuery(name = "userByUserName", query = "select u from Users u where u.username =:username")
         }
 )
-public class Users implements Serializable {
+public class UsersEntity implements Serializable {
 
     @Id
     @Column(name = "ID")
@@ -75,6 +75,7 @@ public class Users implements Serializable {
     private String salt;
 
     @Column(name = "DOB")
+    @Size(max = 30)
     private String dob;
 
     @Column(name = "CONTACTNUMBER")

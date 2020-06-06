@@ -4,9 +4,9 @@ package com.upgrad.quora.service.business;
 import com.upgrad.quora.service.dao.AnswerDao;
 import com.upgrad.quora.service.dao.QuestionDao;
 import com.upgrad.quora.service.dao.UserDao;
-import com.upgrad.quora.service.entity.Answer;
-import com.upgrad.quora.service.entity.Question;
-import com.upgrad.quora.service.entity.UserAuth;
+import com.upgrad.quora.service.entity.AnswerEntity;
+import com.upgrad.quora.service.entity.QuestionEntity;
+import com.upgrad.quora.service.entity.UserAuthEntity;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
 import com.upgrad.quora.service.exception.InvalidQuestionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +29,8 @@ public class CreateAnswerBusinessService {
     QuestionDao questionDao;
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public Answer createAnswer(final Answer answerEntity, final String questionId, final String authorization) throws AuthorizationFailedException, InvalidQuestionException {
-        UserAuth userAuthEntity = userDao.getUserAuthToken(authorization);
+    public AnswerEntity createAnswer(final AnswerEntity answerEntity, final String questionId, final String authorization) throws AuthorizationFailedException, InvalidQuestionException {
+        UserAuthEntity userAuthEntity = userDao.getUserAuthToken(authorization);
 
         // Validate if user is signed in or not
         if (userAuthEntity == null) {
@@ -43,7 +43,7 @@ public class CreateAnswerBusinessService {
         }
 
         // Validate if requested question exist
-        Question questionEntity = questionDao.getQuestionById(questionId);
+        QuestionEntity questionEntity = questionDao.getQuestionById(questionId);
         if (questionEntity == null) {
             throw new InvalidQuestionException("QUES-001", "The question entered is invalid");
         }
@@ -52,6 +52,7 @@ public class CreateAnswerBusinessService {
         answerEntity.setDate(ZonedDateTime.now());
         answerEntity.setUser(userAuthEntity.getUser());
         answerEntity.setQuestion(questionEntity);
+        answerEntity.setRole(userAuthEntity.getUser().getRole());
 
         return answerDao.createAnswer(answerEntity);
     }

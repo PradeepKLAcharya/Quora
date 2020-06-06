@@ -23,7 +23,7 @@ public class EditAnswerBusinessService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public Answer editAnswerContent(final Answer answerEntity, final String authorization) throws AuthorizationFailedException, AnswerNotFoundException {
-        UserAuth userAuthEntity = userDao.FindByAuthToken(authorization);
+        UserAuth userAuthEntity = userDao.getUserAuthToken(authorization);
 
         // Validate if user is signed in or not
         if (userAuthEntity == null) {

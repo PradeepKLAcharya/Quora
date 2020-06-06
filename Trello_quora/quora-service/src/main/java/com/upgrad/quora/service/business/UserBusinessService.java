@@ -15,7 +15,7 @@ public class UserBusinessService {
 
     public Users getUser(String userUuid, String authorization) throws AuthorizationFailedException, UserNotFoundException {
 
-        UserAuth userAuthTokenEntity = userDao.FindByAuthToken(authorization);
+        UserAuth userAuthTokenEntity = userDao.getUserAuthToken(authorization);
         if(userAuthTokenEntity == null)
         {
             throw new AuthorizationFailedException("ATHR-001","User has not signed in");

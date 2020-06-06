@@ -20,7 +20,7 @@ public class QuestionDao {
 
     public Question getQuestionByQUuid(final String uuid) {
         try {
-            return entityManager.createNamedQuery("questionByQUuid", Question.class).setParameter("uuid", uuid).getSingleResult();
+            return entityManager.createNamedQuery("getQuestionById", Question.class).setParameter("uuid", uuid).getSingleResult();
         } catch (NoResultException nre) {
             return null;
         }
@@ -42,20 +42,70 @@ public class QuestionDao {
             return null;
         }
     }
-    public Question updateQuestion(final Question questionEntity) {
-        return entityManager.merge(questionEntity);
-    }
+
 
     public void deleteQuestion(final String uuid) {
         Question questionEntity = getQuestionByQUuid(uuid);
         entityManager.remove(questionEntity);
     }
 
-    public Question getQuestionById(String questionId) {
-        try {
-            return entityManager.createNamedQuery("questionById", Question.class).setParameter("uuid", questionId).getSingleResult();
-        } catch (NoResultException nre) {
-            return null;
-        }
-    }
+
+
+		/**
+	 * @return List<Question>
+	 */
+	public List<Question> getQuestions() {
+		try {
+			return entityManager.createNamedQuery("allQuestions", Question.class).getResultList();
+		} catch (NoResultException nre) {
+			return null;
+		}
+	}
+
+		/**
+	 * @param userid
+	 * @return List<Question>
+	 */
+	public List<Question> getQuestionsByUser(Integer userid) {
+		try {
+			return entityManager.createNamedQuery("questionsByUser", Question.class).setParameter("qid", userid)
+					.getResultList();
+		} catch (NoResultException nre) {
+			return null;
+		}
+	}
+
+		/**
+	 * Update the question
+	 *
+	 * @param questionEntity question entity to be updated.
+	 */
+	public Question updateQuestion(final Question questionEntity) {
+		return entityManager.merge(questionEntity);
+	}
+		/**
+	 * Get the question for the given id.
+	 *
+	 * @param questionId id of the required question.
+	 * @return Question if question with given id is found else null.
+	 */
+	public Question getQuestionById(final String questionId) {
+		try {
+			return entityManager.createNamedQuery("getQuestionById", Question.class).setParameter("uuid", questionId).getSingleResult();
+		} catch (NoResultException nre) {
+			return null;
+		}
+	}
+	/**
+	 * Delete the question
+	 *
+	 * @param Question question entity to be deleted.
+	 */
+	public Question deleteQuestion(Question questionEntity) {
+
+		entityManager.remove(questionEntity);
+		return questionEntity;
+	}
+
 }
+

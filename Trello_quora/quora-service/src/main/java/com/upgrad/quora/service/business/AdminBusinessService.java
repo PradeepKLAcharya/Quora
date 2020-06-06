@@ -19,7 +19,7 @@ public class AdminBusinessService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public Users deleteUser(String userUuid, String authorization) throws AuthorizationFailedException, UserNotFoundException {
-        UserAuth userAuthTokenEntity = userDao.FindByAuthToken(authorization);
+        UserAuth userAuthTokenEntity = userDao.getUserAuthToken(authorization);
         if(userAuthTokenEntity == null)
         {
             throw new AuthorizationFailedException("ATHR-001","User has not signed in");

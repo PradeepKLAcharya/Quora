@@ -102,3 +102,15 @@ Trello_quora/quora-api/target/classes/src/main/resources/application.properties
 Trello_quora/quora-api/target/classes/README.md
 Trello_quora/quora-service/target/classes/com/upgrad/quora/service/business/SignupBusinessService.class
 Trello_quora/quora-service/target/classes/com/upgrad/quora/service/entity/Users.class
+Trello_quora/quora-api/target/surefire-reports/com.upgrad.quora.api.controller.AdminControllerTest.txt
+*.txt
+Trello_quora/quora-api/target/surefire-reports/TEST-com.upgrad.quora.api.controller.AdminControllerTest.xml
+Trello_quora/quora-api/target/surefire-reports/TEST-com.upgrad.quora.api.controller.AnswerControllerTest.xml
+Trello_quora/quora-api/target/surefire-reports/TEST-com.upgrad.quora.api.controller.CommonControllerTest.xml
+Trello_quora/quora-api/target/surefire-reports/TEST-com.upgrad.quora.api.controller.UserControllerTest.xml
+
+Trello_quora/quora-api/target/surefire-reports/com.upgrad.quora.api.controller.AnswerControllerTest.txt
+Trello_quora/quora-api/target/classes/pom.xml
+Trello_quora/quora-api/target/surefire-reports/TEST-com.upgrad.quora.api.controller.AnswerControllerTest.xml
+*.txt
+Trello_quora/quora-api/target/surefire-reports/TEST-com.upgrad.quora.api.controller.AnswerControllerTest.xml

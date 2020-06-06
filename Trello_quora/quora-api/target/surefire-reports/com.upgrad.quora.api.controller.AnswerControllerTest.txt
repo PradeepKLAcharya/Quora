@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+Test set: com.upgrad.quora.api.controller.AnswerControllerTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.215 s <<< FAILURE! - in com.upgrad.quora.api.controller.AnswerControllerTest
+editAnswerWithoutOwnership(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.028 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
+Caused by: org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
+Caused by: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
+Caused by: org.postgresql.util.PSQLException: 
+ERROR: column answer0_.role does not exist
+  Position: 121
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
+
+editNonExistingAnswer(com.upgrad.quora.api.controller.AnswerControllerTest)  Time elapsed: 0.02 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
+Caused by: org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
+Caused by: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
+Caused by: org.postgresql.util.PSQLException: 
+ERROR: column answer0_.role does not exist
+  Position: 121
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
+

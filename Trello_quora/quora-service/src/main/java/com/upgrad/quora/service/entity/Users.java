@@ -9,9 +9,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
 @Entity
-@Table(name = "Users", schema = "public")
+@Table(name = "users", schema = "public")
 @NamedQueries(
         {
                 @NamedQuery(name = "userByUuid", query = "select u from Users u where u.uuid = :uuid"),
@@ -76,7 +75,7 @@ public class Users implements Serializable {
     private String salt;
 
     @Column(name = "DOB")
-    private ZonedDateTime dob;
+    private String dob;
 
     @Column(name = "CONTACTNUMBER")
     @NotNull
@@ -171,11 +170,11 @@ public class Users implements Serializable {
         this.salt = salt;
     }
 
-    public ZonedDateTime getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(ZonedDateTime dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 

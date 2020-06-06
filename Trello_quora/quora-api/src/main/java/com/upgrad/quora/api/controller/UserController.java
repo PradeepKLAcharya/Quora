@@ -41,7 +41,7 @@ public class UserController {
         userEntity.setUuid(UUID.randomUUID().toString());
         userEntity.setAboutme(signupUserRequest.getAboutMe());
         userEntity.setCountry(signupUserRequest.getCountry());
-        userEntity.setDob(ZonedDateTime.now()); //todo: Convert the datatime string to zonedtime
+        userEntity.setDob(ZonedDateTime.now().toString()); //todo: Convert the datatime string to zonedtime
         userEntity.setFirstName(signupUserRequest.getFirstName());
         userEntity.setLastName(signupUserRequest.getLastName());
         userEntity.setEmail(signupUserRequest.getEmailAddress());

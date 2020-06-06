@@ -30,7 +30,7 @@ public class CreateAnswerBusinessService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public Answer createAnswer(final Answer answerEntity, final String questionId, final String authorization) throws AuthorizationFailedException, InvalidQuestionException {
-        UserAuth userAuthEntity = userDao.FindByAuthToken(authorization);
+        UserAuth userAuthEntity = userDao.getUserAuthToken(authorization);
 
         // Validate if user is signed in or not
         if (userAuthEntity == null) {

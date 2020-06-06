@@ -41,7 +41,7 @@ public class UserDao {
         return userAuthTokenEntity;
     }
 
-    public UserAuth FindByAuthToken(String token) {
+    public UserAuth getUserAuthToken(String token) {
         try {
             return entityManager.createNamedQuery("userByAuthToken", UserAuth.class).setParameter("accessToken", token)
                     .getSingleResult();
@@ -49,7 +49,7 @@ public class UserDao {
             return null;
         }
     }
-
+    
     public void updateUserEntity(UserAuth userEntity) {
         entityManager.merge(userEntity);
     }

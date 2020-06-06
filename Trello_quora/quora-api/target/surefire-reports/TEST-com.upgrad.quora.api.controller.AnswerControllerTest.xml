@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.upgrad.quora.api.controller.AnswerControllerTest" time="0.215" tests="7" errors="2" skipped="0" failures="0">
+  <properties>
+    <property name="gopherProxySet" value="false"/>
+    <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="sun.cpu.isalist" value=""/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/pkl/GitProjects/Upgrad/Quora/Trello_quora/quora-api/target/test-classes:/Users/pkl/GitProjects/Upgrad/Quora/Trello_quora/quora-api/target/classes:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-web/2.0.1.RELEASE/spring-boot-starter-web-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter/2.0.1.RELEASE/spring-boot-starter-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot/2.0.1.RELEASE/spring-boot-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/2.0.1.RELEASE/spring-boot-autoconfigure-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-logging/2.0.1.RELEASE/spring-boot-starter-logging-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.10.0/log4j-to-slf4j-2.10.0.jar:/Users/pkl/.m2/repository/org/apache/logging/log4j/log4j-api/2.10.0/log4j-api-2.10.0.jar:/Users/pkl/.m2/repository/org/slf4j/jul-to-slf4j/1.7.25/jul-to-slf4j-1.7.25.jar:/Users/pkl/.m2/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar:/Users/pkl/.m2/repository/org/yaml/snakeyaml/1.19/snakeyaml-1.19.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-json/2.0.1.RELEASE/spring-boot-starter-json-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.9.5/jackson-databind-2.9.5.jar:/Users/pkl/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.9.5/jackson-core-2.9.5.jar:/Users/pkl/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.9.5/jackson-datatype-jdk8-2.9.5.jar:/Users/pkl/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.9.5/jackson-datatype-jsr310-2.9.5.jar:/Users/pkl/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.9.5/jackson-module-parameter-names-2.9.5.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/2.0.1.RELEASE/spring-boot-starter-tomcat-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/8.5.29/tomcat-embed-core-8.5.29.jar:/Users/pkl/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/8.5.29/tomcat-embed-el-8.5.29.jar:/Users/pkl/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.29/tomcat-embed-websocket-8.5.29.jar:/Users/pkl/.m2/repository/org/hibernate/validator/hibernate-validator/6.0.9.Final/hibernate-validator-6.0.9.Final.jar:/Users/pkl/.m2/repository/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar:/Users/pkl/.m2/repository/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar:/Users/pkl/.m2/repository/org/springframework/spring-webmvc/5.0.5.RELEASE/spring-webmvc-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/io/swagger/swagger-annotations/1.5.18/swagger-annotations-1.5.18.jar:/Users/pkl/.m2/repository/io/springfox/springfox-swagger2/2.6.1/springfox-swagger2-2.6.1.jar:/Users/pkl/.m2/repository/io/swagger/swagger-models/1.5.10/swagger-models-1.5.10.jar:/Users/pkl/.m2/repository/io/springfox/springfox-spi/2.6.1/springfox-spi-2.6.1.jar:/Users/pkl/.m2/repository/io/springfox/springfox-core/2.6.1/springfox-core-2.6.1.jar:/Users/pkl/.m2/repository/io/springfox/springfox-schema/2.6.1/springfox-schema-2.6.1.jar:/Users/pkl/.m2/repository/io/springfox/springfox-swagger-common/2.6.1/springfox-swagger-common-2.6.1.jar:/Users/pkl/.m2/repository/io/springfox/springfox-spring-web/2.6.1/springfox-spring-web-2.6.1.jar:/Users/pkl/.m2/repository/com/google/guava/guava/18.0/guava-18.0.jar:/Users/pkl/.m2/repository/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar:/Users/pkl/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar:/Users/pkl/.m2/repository/org/springframework/plugin/spring-plugin-core/1.2.0.RELEASE/spring-plugin-core-1.2.0.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/plugin/spring-plugin-metadata/1.2.0.RELEASE/spring-plugin-metadata-1.2.0.RELEASE.jar:/Users/pkl/.m2/repository/org/mapstruct/mapstruct/1.0.0.Final/mapstruct-1.0.0.Final.jar:/Users/pkl/.m2/repository/io/springfox/springfox-swagger-ui/2.6.1/springfox-swagger-ui-2.6.1.jar:/Users/pkl/GitProjects/Upgrad/Quora/Trello_quora/quora-service/target/quora-service-1.0-SNAPSHOT.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-validation/2.0.1.RELEASE/spring-boot-starter-validation-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/2.0.1.RELEASE/spring-boot-starter-data-jpa-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-aop/2.0.1.RELEASE/spring-boot-starter-aop-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/aspectj/aspectjweaver/1.8.13/aspectjweaver-1.8.13.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/2.0.1.RELEASE/spring-boot-starter-jdbc-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/com/zaxxer/HikariCP/2.7.8/HikariCP-2.7.8.jar:/Users/pkl/.m2/repository/org/springframework/spring-jdbc/5.0.5.RELEASE/spring-jdbc-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/hibernate/hibernate-core/5.2.16.Final/hibernate-core-5.2.16.Final.jar:/Users/pkl/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar:/Users/pkl/.m2/repository/org/javassist/javassist/3.22.0-GA/javassist-3.22.0-GA.jar:/Users/pkl/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar:/Users/pkl/.m2/repository/org/jboss/jandex/2.0.3.Final/jandex-2.0.3.Final.jar:/Users/pkl/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar:/Users/pkl/.m2/repository/org/hibernate/common/hibernate-commons-annotations/5.0.1.Final/hibernate-commons-annotations-5.0.1.Final.jar:/Users/pkl/.m2/repository/javax/transaction/javax.transaction-api/1.2/javax.transaction-api-1.2.jar:/Users/pkl/.m2/repository/org/springframework/data/spring-data-jpa/2.0.6.RELEASE/spring-data-jpa-2.0.6.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/data/spring-data-commons/2.0.6.RELEASE/spring-data-commons-2.0.6.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-orm/5.0.5.RELEASE/spring-orm-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-tx/5.0.5.RELEASE/spring-tx-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-aspects/5.0.5.RELEASE/spring-aspects-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/apache/commons/commons-lang3/3.7/commons-lang3-3.7.jar:/Users/pkl/.m2/repository/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar:/Users/pkl/.m2/repository/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar:/Users/pkl/.m2/repository/com/auth0/java-jwt/3.4.0/java-jwt-3.4.0.jar:/Users/pkl/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-test/2.0.1.RELEASE/spring-boot-starter-test-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-test/2.0.1.RELEASE/spring-boot-test-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/2.0.1.RELEASE/spring-boot-test-autoconfigure-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/com/jayway/jsonpath/json-path/2.4.0/json-path-2.4.0.jar:/Users/pkl/.m2/repository/net/minidev/json-smart/2.3/json-smart-2.3.jar:/Users/pkl/.m2/repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2.jar:/Users/pkl/.m2/repository/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar:/Users/pkl/.m2/repository/junit/junit/4.12/junit-4.12.jar:/Users/pkl/.m2/repository/org/assertj/assertj-core/3.9.1/assertj-core-3.9.1.jar:/Users/pkl/.m2/repository/org/mockito/mockito-core/2.15.0/mockito-core-2.15.0.jar:/Users/pkl/.m2/repository/net/bytebuddy/byte-buddy/1.7.11/byte-buddy-1.7.11.jar:/Users/pkl/.m2/repository/net/bytebuddy/byte-buddy-agent/1.7.11/byte-buddy-agent-1.7.11.jar:/Users/pkl/.m2/repository/org/objenesis/objenesis/2.6/objenesis-2.6.jar:/Users/pkl/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/pkl/.m2/repository/org/hamcrest/hamcrest-library/1.3/hamcrest-library-1.3.jar:/Users/pkl/.m2/repository/org/skyscreamer/jsonassert/1.5.0/jsonassert-1.5.0.jar:/Users/pkl/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/pkl/.m2/repository/org/springframework/spring-core/5.0.5.RELEASE/spring-core-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-jcl/5.0.5.RELEASE/spring-jcl-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-test/5.0.5.RELEASE/spring-test-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/xmlunit/xmlunit-core/2.5.1/xmlunit-core-2.5.1.jar:/Users/pkl/.m2/repository/org/postgresql/postgresql/42.2.5/postgresql-42.2.5.jar:/Users/pkl/.m2/repository/org/springframework/spring-web/5.0.8.RELEASE/spring-web-5.0.8.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-beans/5.0.5.RELEASE/spring-beans-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.9.6/jackson-annotations-2.9.6.jar:/Users/pkl/.m2/repository/org/springframework/spring-context/5.0.8.RELEASE/spring-context-5.0.8.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-aop/5.0.5.RELEASE/spring-aop-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-expression/5.0.5.RELEASE/spring-expression-5.0.5.RELEASE.jar:"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="user.timezone" value=""/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib"/>
+    <property name="sun.java.command" value="/Users/pkl/GitProjects/Upgrad/Quora/Trello_quora/quora-api/target/surefire/surefirebooter4836349100071120227.jar /Users/pkl/GitProjects/Upgrad/Quora/Trello_quora/quora-api/target/surefire 2020-06-06T14-56-56_360-jvmRun1 surefire6213515698188559977tmp surefire_07974060261074069721tmp"/>
+    <property name="surefire.test.class.path" value="/Users/pkl/GitProjects/Upgrad/Quora/Trello_quora/quora-api/target/test-classes:/Users/pkl/GitProjects/Upgrad/Quora/Trello_quora/quora-api/target/classes:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-web/2.0.1.RELEASE/spring-boot-starter-web-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter/2.0.1.RELEASE/spring-boot-starter-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot/2.0.1.RELEASE/spring-boot-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/2.0.1.RELEASE/spring-boot-autoconfigure-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-logging/2.0.1.RELEASE/spring-boot-starter-logging-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.10.0/log4j-to-slf4j-2.10.0.jar:/Users/pkl/.m2/repository/org/apache/logging/log4j/log4j-api/2.10.0/log4j-api-2.10.0.jar:/Users/pkl/.m2/repository/org/slf4j/jul-to-slf4j/1.7.25/jul-to-slf4j-1.7.25.jar:/Users/pkl/.m2/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar:/Users/pkl/.m2/repository/org/yaml/snakeyaml/1.19/snakeyaml-1.19.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-json/2.0.1.RELEASE/spring-boot-starter-json-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.9.5/jackson-databind-2.9.5.jar:/Users/pkl/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.9.5/jackson-core-2.9.5.jar:/Users/pkl/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.9.5/jackson-datatype-jdk8-2.9.5.jar:/Users/pkl/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.9.5/jackson-datatype-jsr310-2.9.5.jar:/Users/pkl/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.9.5/jackson-module-parameter-names-2.9.5.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/2.0.1.RELEASE/spring-boot-starter-tomcat-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/8.5.29/tomcat-embed-core-8.5.29.jar:/Users/pkl/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/8.5.29/tomcat-embed-el-8.5.29.jar:/Users/pkl/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.29/tomcat-embed-websocket-8.5.29.jar:/Users/pkl/.m2/repository/org/hibernate/validator/hibernate-validator/6.0.9.Final/hibernate-validator-6.0.9.Final.jar:/Users/pkl/.m2/repository/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar:/Users/pkl/.m2/repository/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar:/Users/pkl/.m2/repository/org/springframework/spring-webmvc/5.0.5.RELEASE/spring-webmvc-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/io/swagger/swagger-annotations/1.5.18/swagger-annotations-1.5.18.jar:/Users/pkl/.m2/repository/io/springfox/springfox-swagger2/2.6.1/springfox-swagger2-2.6.1.jar:/Users/pkl/.m2/repository/io/swagger/swagger-models/1.5.10/swagger-models-1.5.10.jar:/Users/pkl/.m2/repository/io/springfox/springfox-spi/2.6.1/springfox-spi-2.6.1.jar:/Users/pkl/.m2/repository/io/springfox/springfox-core/2.6.1/springfox-core-2.6.1.jar:/Users/pkl/.m2/repository/io/springfox/springfox-schema/2.6.1/springfox-schema-2.6.1.jar:/Users/pkl/.m2/repository/io/springfox/springfox-swagger-common/2.6.1/springfox-swagger-common-2.6.1.jar:/Users/pkl/.m2/repository/io/springfox/springfox-spring-web/2.6.1/springfox-spring-web-2.6.1.jar:/Users/pkl/.m2/repository/com/google/guava/guava/18.0/guava-18.0.jar:/Users/pkl/.m2/repository/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar:/Users/pkl/.m2/repository/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar:/Users/pkl/.m2/repository/org/springframework/plugin/spring-plugin-core/1.2.0.RELEASE/spring-plugin-core-1.2.0.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/plugin/spring-plugin-metadata/1.2.0.RELEASE/spring-plugin-metadata-1.2.0.RELEASE.jar:/Users/pkl/.m2/repository/org/mapstruct/mapstruct/1.0.0.Final/mapstruct-1.0.0.Final.jar:/Users/pkl/.m2/repository/io/springfox/springfox-swagger-ui/2.6.1/springfox-swagger-ui-2.6.1.jar:/Users/pkl/GitProjects/Upgrad/Quora/Trello_quora/quora-service/target/quora-service-1.0-SNAPSHOT.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-validation/2.0.1.RELEASE/spring-boot-starter-validation-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/2.0.1.RELEASE/spring-boot-starter-data-jpa-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-aop/2.0.1.RELEASE/spring-boot-starter-aop-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/aspectj/aspectjweaver/1.8.13/aspectjweaver-1.8.13.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/2.0.1.RELEASE/spring-boot-starter-jdbc-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/com/zaxxer/HikariCP/2.7.8/HikariCP-2.7.8.jar:/Users/pkl/.m2/repository/org/springframework/spring-jdbc/5.0.5.RELEASE/spring-jdbc-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/hibernate/hibernate-core/5.2.16.Final/hibernate-core-5.2.16.Final.jar:/Users/pkl/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar:/Users/pkl/.m2/repository/org/javassist/javassist/3.22.0-GA/javassist-3.22.0-GA.jar:/Users/pkl/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar:/Users/pkl/.m2/repository/org/jboss/jandex/2.0.3.Final/jandex-2.0.3.Final.jar:/Users/pkl/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar:/Users/pkl/.m2/repository/org/hibernate/common/hibernate-commons-annotations/5.0.1.Final/hibernate-commons-annotations-5.0.1.Final.jar:/Users/pkl/.m2/repository/javax/transaction/javax.transaction-api/1.2/javax.transaction-api-1.2.jar:/Users/pkl/.m2/repository/org/springframework/data/spring-data-jpa/2.0.6.RELEASE/spring-data-jpa-2.0.6.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/data/spring-data-commons/2.0.6.RELEASE/spring-data-commons-2.0.6.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-orm/5.0.5.RELEASE/spring-orm-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-tx/5.0.5.RELEASE/spring-tx-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-aspects/5.0.5.RELEASE/spring-aspects-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/apache/commons/commons-lang3/3.7/commons-lang3-3.7.jar:/Users/pkl/.m2/repository/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar:/Users/pkl/.m2/repository/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar:/Users/pkl/.m2/repository/com/auth0/java-jwt/3.4.0/java-jwt-3.4.0.jar:/Users/pkl/.m2/repository/commons-codec/commons-codec/1.11/commons-codec-1.11.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-starter-test/2.0.1.RELEASE/spring-boot-starter-test-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-test/2.0.1.RELEASE/spring-boot-test-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/2.0.1.RELEASE/spring-boot-test-autoconfigure-2.0.1.RELEASE.jar:/Users/pkl/.m2/repository/com/jayway/jsonpath/json-path/2.4.0/json-path-2.4.0.jar:/Users/pkl/.m2/repository/net/minidev/json-smart/2.3/json-smart-2.3.jar:/Users/pkl/.m2/repository/net/minidev/accessors-smart/1.2/accessors-smart-1.2.jar:/Users/pkl/.m2/repository/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar:/Users/pkl/.m2/repository/junit/junit/4.12/junit-4.12.jar:/Users/pkl/.m2/repository/org/assertj/assertj-core/3.9.1/assertj-core-3.9.1.jar:/Users/pkl/.m2/repository/org/mockito/mockito-core/2.15.0/mockito-core-2.15.0.jar:/Users/pkl/.m2/repository/net/bytebuddy/byte-buddy/1.7.11/byte-buddy-1.7.11.jar:/Users/pkl/.m2/repository/net/bytebuddy/byte-buddy-agent/1.7.11/byte-buddy-agent-1.7.11.jar:/Users/pkl/.m2/repository/org/objenesis/objenesis/2.6/objenesis-2.6.jar:/Users/pkl/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/pkl/.m2/repository/org/hamcrest/hamcrest-library/1.3/hamcrest-library-1.3.jar:/Users/pkl/.m2/repository/org/skyscreamer/jsonassert/1.5.0/jsonassert-1.5.0.jar:/Users/pkl/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/pkl/.m2/repository/org/springframework/spring-core/5.0.5.RELEASE/spring-core-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-jcl/5.0.5.RELEASE/spring-jcl-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-test/5.0.5.RELEASE/spring-test-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/xmlunit/xmlunit-core/2.5.1/xmlunit-core-2.5.1.jar:/Users/pkl/.m2/repository/org/postgresql/postgresql/42.2.5/postgresql-42.2.5.jar:/Users/pkl/.m2/repository/org/springframework/spring-web/5.0.8.RELEASE/spring-web-5.0.8.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-beans/5.0.5.RELEASE/spring-beans-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.9.6/jackson-annotations-2.9.6.jar:/Users/pkl/.m2/repository/org/springframework/spring-context/5.0.8.RELEASE/spring-context-5.0.8.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-aop/5.0.5.RELEASE/spring-aop-5.0.5.RELEASE.jar:/Users/pkl/.m2/repository/org/springframework/spring-expression/5.0.5.RELEASE/spring-expression-5.0.5.RELEASE.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/pkl"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre"/>
+    <property name="basedir" value="/Users/pkl/GitProjects/Upgrad/Quora/Trello_quora/quora-api"/>
+    <property name="file.separator" value="/"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="/Users/pkl/GitProjects/Upgrad/Quora/Trello_quora/quora-api/target/surefire/surefirebooter4836349100071120227.jar"/>
+    <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/classes"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="1.8.0_231-b11"/>
+    <property name="user.name" value="pkl"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="10.14.5"/>
+    <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/endorsed"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="US-ASCII"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="/Users/pkl/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="/var/folders/s4/dlfgsgpn2lndy8_yjc2_67vj4jpdsz/T/"/>
+    <property name="java.version" value="1.8.0_231"/>
+    <property name="user.dir" value="/Users/pkl/GitProjects/Upgrad/Quora/Trello_quora/quora-api"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.library.path" value="/Users/pkl/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="25.231-b11"/>
+    <property name="java.ext.dirs" value="/Users/pkl/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="java.class.version" value="52.0"/>
+  </properties>
+  <testcase name="editAnswerWithNonExistingAccessToken" classname="com.upgrad.quora.api.controller.AnswerControllerTest" time="0.014"/>
+  <testcase name="createAnswerForNonExistingQuestion" classname="com.upgrad.quora.api.controller.AnswerControllerTest" time="0.028"/>
+  <testcase name="editAnswerWithoutOwnership" classname="com.upgrad.quora.api.controller.AnswerControllerTest" time="0.028">
+    <error message="Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet" type="org.springframework.web.util.NestedServletException">org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
+Caused by: org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
+Caused by: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
+Caused by: org.postgresql.util.PSQLException: 
+ERROR: column answer0_.role does not exist
+  Position: 121
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editAnswerWithoutOwnership(AnswerControllerTest.java:78)
+</error>
+    <system-out><![CDATA[2020-06-06 14:57:05.171  WARN 32237 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 42703
+2020-06-06 14:57:05.171 ERROR 32237 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : ERROR: column answer0_.role does not exist
+  Position: 121
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /user/signup
+       Parameters = {firstName=[a], lastName=[a], userName=[non_existing_username], emailAddress=[database_email], password=[a], country=[a], aboutMe=[a], dob=[a], contactNumber=[a]}
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.upgrad.quora.api.controller.UserController
+           Method = public org.springframework.http.ResponseEntity<com.upgrad.quora.api.model.SignupUserResponse> com.upgrad.quora.api.controller.UserController.signup(com.upgrad.quora.api.model.SignupUserRequest) throws com.upgrad.quora.service.exception.SignUpRestrictedException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = com.upgrad.quora.service.exception.SignUpRestrictedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 409
+    Error message = null
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+     Content type = application/json;charset=UTF-8
+             Body = {"code":"SGR-002","message":"This user has already been registered, try with any other emailId","root_cause":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /user/signout
+       Parameters = {}
+          Headers = {authorization=[non_existing_access_token]}
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.upgrad.quora.api.controller.UserController
+           Method = public org.springframework.http.ResponseEntity<com.upgrad.quora.api.model.SignoutResponse> com.upgrad.quora.api.controller.UserController.logout(java.lang.String) throws com.upgrad.quora.service.exception.SignOutRestrictedException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = com.upgrad.quora.service.exception.SignOutRestrictedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = null
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+     Content type = application/json;charset=UTF-8
+             Body = {"code":"SGR-001","message":"User is not Signed in","root_cause":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /user/signup
+       Parameters = {firstName=[a], lastName=[a], userName=[database_username], emailAddress=[a], password=[a], country=[a], aboutMe=[a], dob=[a], contactNumber=[a]}
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.upgrad.quora.api.controller.UserController
+           Method = public org.springframework.http.ResponseEntity<com.upgrad.quora.api.model.SignupUserResponse> com.upgrad.quora.api.controller.UserController.signup(com.upgrad.quora.api.model.SignupUserRequest) throws com.upgrad.quora.service.exception.SignUpRestrictedException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = com.upgrad.quora.service.exception.SignUpRestrictedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 409
+    Error message = null
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+     Content type = application/json;charset=UTF-8
+             Body = {"code":"SGR-001","message":"Try any other Username, this Username has already been taken","root_cause":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = PUT
+      Request URI = /answer/edit/database_answer_uuid
+       Parameters = {content=[edited_answer]}
+          Headers = {Content-Type=[application/json;charset=UTF-8], authorization=[non_existing_access_token]}
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.upgrad.quora.api.controller.AnswerController
+           Method = public org.springframework.http.ResponseEntity<com.upgrad.quora.api.model.AnswerEditResponse> com.upgrad.quora.api.controller.AnswerController.editAnswerContent(com.upgrad.quora.api.model.AnswerEditRequest,java.lang.String,java.lang.String) throws com.upgrad.quora.service.exception.AuthorizationFailedException,com.upgrad.quora.service.exception.AnswerNotFoundException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = com.upgrad.quora.service.exception.AuthorizationFailedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 403
+    Error message = null
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+     Content type = application/json;charset=UTF-8
+             Body = {"code":"ATHR-001","message":"User has not signed in","root_cause":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /question/non_existing_question_uuid/answer/create
+       Parameters = {answer=[my_answer]}
+          Headers = {Content-Type=[application/json;charset=UTF-8], authorization=[database_accesstoken]}
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.upgrad.quora.api.controller.AnswerController
+           Method = public org.springframework.http.ResponseEntity<com.upgrad.quora.api.model.AnswerResponse> com.upgrad.quora.api.controller.AnswerController.createAnswer(com.upgrad.quora.api.model.AnswerRequest,java.lang.String,java.lang.String) throws com.upgrad.quora.service.exception.AuthorizationFailedException,com.upgrad.quora.service.exception.InvalidQuestionException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = com.upgrad.quora.service.exception.InvalidQuestionException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 404
+    Error message = null
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+     Content type = application/json;charset=UTF-8
+             Body = {"code":"QUES-001","message":"The question entered is invalid","root_cause":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  </testcase>
+  <testcase name="editAnswerWithSignedOutUser" classname="com.upgrad.quora.api.controller.AnswerControllerTest" time="0.003"/>
+  <testcase name="createAnswerWithNonExistingAccessToken" classname="com.upgrad.quora.api.controller.AnswerControllerTest" time="0.005"/>
+  <testcase name="createAnswerWithSignedOutUser" classname="com.upgrad.quora.api.controller.AnswerControllerTest" time="0.006"/>
+  <testcase name="editNonExistingAnswer" classname="com.upgrad.quora.api.controller.AnswerControllerTest" time="0.02">
+    <error message="Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet" type="org.springframework.web.util.NestedServletException">org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
+Caused by: org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
+Caused by: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
+Caused by: org.postgresql.util.PSQLException: 
+ERROR: column answer0_.role does not exist
+  Position: 121
+	at com.upgrad.quora.api.controller.AnswerControllerTest.editNonExistingAnswer(AnswerControllerTest.java:70)
+</error>
+    <system-out><![CDATA[2020-06-06 14:57:05.206  WARN 32237 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 42703
+2020-06-06 14:57:05.206 ERROR 32237 --- [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : ERROR: column answer0_.role does not exist
+  Position: 121
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /user/signup
+       Parameters = {firstName=[a], lastName=[a], userName=[non_existing_username], emailAddress=[database_email], password=[a], country=[a], aboutMe=[a], dob=[a], contactNumber=[a]}
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.upgrad.quora.api.controller.UserController
+           Method = public org.springframework.http.ResponseEntity<com.upgrad.quora.api.model.SignupUserResponse> com.upgrad.quora.api.controller.UserController.signup(com.upgrad.quora.api.model.SignupUserRequest) throws com.upgrad.quora.service.exception.SignUpRestrictedException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = com.upgrad.quora.service.exception.SignUpRestrictedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 409
+    Error message = null
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+     Content type = application/json;charset=UTF-8
+             Body = {"code":"SGR-002","message":"This user has already been registered, try with any other emailId","root_cause":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /user/signout
+       Parameters = {}
+          Headers = {authorization=[non_existing_access_token]}
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.upgrad.quora.api.controller.UserController
+           Method = public org.springframework.http.ResponseEntity<com.upgrad.quora.api.model.SignoutResponse> com.upgrad.quora.api.controller.UserController.logout(java.lang.String) throws com.upgrad.quora.service.exception.SignOutRestrictedException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = com.upgrad.quora.service.exception.SignOutRestrictedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 401
+    Error message = null
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+     Content type = application/json;charset=UTF-8
+             Body = {"code":"SGR-001","message":"User is not Signed in","root_cause":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /user/signup
+       Parameters = {firstName=[a], lastName=[a], userName=[database_username], emailAddress=[a], password=[a], country=[a], aboutMe=[a], dob=[a], contactNumber=[a]}
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.upgrad.quora.api.controller.UserController
+           Method = public org.springframework.http.ResponseEntity<com.upgrad.quora.api.model.SignupUserResponse> com.upgrad.quora.api.controller.UserController.signup(com.upgrad.quora.api.model.SignupUserRequest) throws com.upgrad.quora.service.exception.SignUpRestrictedException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = com.upgrad.quora.service.exception.SignUpRestrictedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 409
+    Error message = null
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+     Content type = application/json;charset=UTF-8
+             Body = {"code":"SGR-001","message":"Try any other Username, this Username has already been taken","root_cause":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = PUT
+      Request URI = /answer/edit/database_answer_uuid
+       Parameters = {content=[edited_answer]}
+          Headers = {Content-Type=[application/json;charset=UTF-8], authorization=[non_existing_access_token]}
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.upgrad.quora.api.controller.AnswerController
+           Method = public org.springframework.http.ResponseEntity<com.upgrad.quora.api.model.AnswerEditResponse> com.upgrad.quora.api.controller.AnswerController.editAnswerContent(com.upgrad.quora.api.model.AnswerEditRequest,java.lang.String,java.lang.String) throws com.upgrad.quora.service.exception.AuthorizationFailedException,com.upgrad.quora.service.exception.AnswerNotFoundException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = com.upgrad.quora.service.exception.AuthorizationFailedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 403
+    Error message = null
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+     Content type = application/json;charset=UTF-8
+             Body = {"code":"ATHR-001","message":"User has not signed in","root_cause":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /question/non_existing_question_uuid/answer/create
+       Parameters = {answer=[my_answer]}
+          Headers = {Content-Type=[application/json;charset=UTF-8], authorization=[database_accesstoken]}
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.upgrad.quora.api.controller.AnswerController
+           Method = public org.springframework.http.ResponseEntity<com.upgrad.quora.api.model.AnswerResponse> com.upgrad.quora.api.controller.AnswerController.createAnswer(com.upgrad.quora.api.model.AnswerRequest,java.lang.String,java.lang.String) throws com.upgrad.quora.service.exception.AuthorizationFailedException,com.upgrad.quora.service.exception.InvalidQuestionException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = com.upgrad.quora.service.exception.InvalidQuestionException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 404
+    Error message = null
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+     Content type = application/json;charset=UTF-8
+             Body = {"code":"QUES-001","message":"The question entered is invalid","root_cause":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = PUT
+      Request URI = /answer/edit/database_answer_uuid
+       Parameters = {content=[edited_answer]}
+          Headers = {Content-Type=[application/json;charset=UTF-8], authorization=[database_accesstoken3]}
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.upgrad.quora.api.controller.AnswerController
+           Method = public org.springframework.http.ResponseEntity<com.upgrad.quora.api.model.AnswerEditResponse> com.upgrad.quora.api.controller.AnswerController.editAnswerContent(com.upgrad.quora.api.model.AnswerEditRequest,java.lang.String,java.lang.String) throws com.upgrad.quora.service.exception.AuthorizationFailedException,com.upgrad.quora.service.exception.AnswerNotFoundException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = com.upgrad.quora.service.exception.AuthorizationFailedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 403
+    Error message = null
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+     Content type = application/json;charset=UTF-8
+             Body = {"code":"ATHR-002","message":"User is signed out.Sign in first to edit an answer","root_cause":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /question/database_question_uuid/answer/create
+       Parameters = {answer=[my_answer]}
+          Headers = {Content-Type=[application/json;charset=UTF-8], authorization=[non_existing_access_token]}
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.upgrad.quora.api.controller.AnswerController
+           Method = public org.springframework.http.ResponseEntity<com.upgrad.quora.api.model.AnswerResponse> com.upgrad.quora.api.controller.AnswerController.createAnswer(com.upgrad.quora.api.model.AnswerRequest,java.lang.String,java.lang.String) throws com.upgrad.quora.service.exception.AuthorizationFailedException,com.upgrad.quora.service.exception.InvalidQuestionException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = com.upgrad.quora.service.exception.AuthorizationFailedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 403
+    Error message = null
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+     Content type = application/json;charset=UTF-8
+             Body = {"code":"ATHR-001","message":"User has not signed in","root_cause":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /question/database_question_uuid/answer/create
+       Parameters = {answer=[my_answer]}
+          Headers = {Content-Type=[application/json;charset=UTF-8], authorization=[database_accesstoken3]}
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = com.upgrad.quora.api.controller.AnswerController
+           Method = public org.springframework.http.ResponseEntity<com.upgrad.quora.api.model.AnswerResponse> com.upgrad.quora.api.controller.AnswerController.createAnswer(com.upgrad.quora.api.model.AnswerRequest,java.lang.String,java.lang.String) throws com.upgrad.quora.service.exception.AuthorizationFailedException,com.upgrad.quora.service.exception.InvalidQuestionException
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = com.upgrad.quora.service.exception.AuthorizationFailedException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 403
+    Error message = null
+          Headers = {Content-Type=[application/json;charset=UTF-8]}
+     Content type = application/json;charset=UTF-8
+             Body = {"code":"ATHR-002","message":"User is signed out.Sign in first to post an answer","root_cause":null}
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  </testcase>
+</testsuite>

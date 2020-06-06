@@ -4,88 +4,103 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+
 @Entity
 @Table(name = "question", schema = "public")
+@NamedQueries(
+		{
+				@NamedQuery(name = "allQuestions", query = "select q from Question q "),
+				@NamedQuery(name = "questionsByUser", query = "select q from Question q where q.user.id = :qid"),
+				@NamedQuery(name = "getQuestionById", query = "select q from Question q where q.uuid=:uuid")
+		}
+)
 public class Question implements Serializable {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @Column(name = "UUID")
-    @Size(max = 64)
-    private String uuid;
+	@Column(name = "UUID")
+	@Size(max = 64)
+	private String uuid;
 
-    @Column(name = "CONTENT")
-    @NotNull
-    @Size(max = 200)
-    private String content;
+	@Column(name = "CONTENT")
+	@NotNull
+	@Size(max = 200)
+	private String content;
 
-    @Column(name = "DATE")
-    private ZonedDateTime date;
+	@Column(name = "DATE")
+	private ZonedDateTime date;
 
-    @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    private Users user;
+	@ManyToOne
+	@JoinColumn(name = "USER_ID")
+	private Users user;
 
-    public Integer getId() {
-        return id;
-    }
+	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn(name = "USER_ID")
+	private Users users;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getUuid() {
-        return uuid;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
+	public String getUuid() {
+		return uuid;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public ZonedDateTime getDate() {
-        return date;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public void setDate(ZonedDateTime date) {
-        this.date = date;
-    }
+	public ZonedDateTime getDate() {
+		return date;
+	}
 
-    public Users getUser() {
-        return user;
-    }
+	public void setDate(ZonedDateTime date) {
+		this.date = date;
+	}
 
-    public void setUser(Users user) {
-        this.user = user;
-    }
+	public Users getUser() {
+		return user;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        return new EqualsBuilder().append(this, obj).isEquals();
-    }
+	public void setUser(Users user) {
+		this.user = user;
+	}
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder().append(this).hashCode();
-    }
+	@Override
+	public boolean equals(Object obj) {
+		return new EqualsBuilder().append(this, obj).isEquals();
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
-    }
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(this).hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+	}
 }

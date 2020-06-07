@@ -43,4 +43,9 @@ public class AnswerDao {
             return null;
         }
     }
+
+    public AnswerEntity deleteAnswer(AnswerEntity answerEntity) {
+        entityManager.remove(answerEntity);
+        return answerEntity;
+    }
 }

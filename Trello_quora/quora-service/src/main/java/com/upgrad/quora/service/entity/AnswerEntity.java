@@ -41,10 +41,12 @@ public class AnswerEntity implements Serializable {
     private ZonedDateTime date;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "USER_ID")
     private UsersEntity user;
 
     @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "QUESTION_ID")
     private QuestionEntity question;
 
@@ -52,8 +54,7 @@ public class AnswerEntity implements Serializable {
     @NotNull
     @Size(max = 200)
     private String role;
-
-
+    
     public String getRole() {
         return role;
     }

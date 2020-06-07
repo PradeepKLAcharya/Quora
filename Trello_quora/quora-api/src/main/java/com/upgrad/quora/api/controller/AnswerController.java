@@ -34,6 +34,10 @@ public class AnswerController {
 	@Autowired
 	private AnswerBusinessService answerBusinessService;
 
+	@Autowired
+	DeleteAnswerBusinessService deleteAnswerBusinessService;
+
+
 	@PostMapping(path = "/question/{questionId}/answer/create", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<AnswerResponse> createAnswer(final AnswerRequest answerRequest,
 			@PathVariable("questionId") final String questionId,
@@ -112,5 +116,14 @@ public class AnswerController {
 					.questionContent(each.getQuestion().getContent()));
 		}
 		return answerDetailsResponse;
+	}
+
+	@RequestMapping(path = "/answer/delete/{answerId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<AnswerDeleteResponse> deleteAnswer(@RequestHeader("authorization") final String authorization, @PathVariable("answerId") final String ansUuid) throws AuthorizationFailedException, AnswerNotFoundException {
+
+		String authorizationToken = authorization.split("Bearer")[1];
+		Answer ansEntity = deleteAnswerBusinessService.deleteAnswer(ansUuid, authorizationToken);
+		AnswerDeleteResponse answerRsp = new AnswerDeleteResponse().id(ansEntity.getUuid()).status("ANSWER DELETED");
+		return new ResponseEntity<AnswerDeleteResponse>(answerRsp, HttpStatus.OK);
 	}
 }

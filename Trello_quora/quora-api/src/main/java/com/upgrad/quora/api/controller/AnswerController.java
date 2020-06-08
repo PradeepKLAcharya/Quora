@@ -29,13 +29,13 @@ public class AnswerController {
 	EditAnswerBusinessService editAnswerBusinessService;
 
 	@Autowired
-	QuestionDao questionDao;
-
-	@Autowired
-	private AnswerBusinessService answerBusinessService;
+	AnswerBusinessService answerBusinessService;
 
 	@Autowired
 	DeleteAnswerBusinessService deleteAnswerBusinessService;
+
+	@Autowired
+	QuestionDao questionDao;
 
 
 	@PostMapping(path = "/question/{questionId}/answer/create", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -93,15 +93,23 @@ public class AnswerController {
 	 * @param questionId
 	 * @return ResponseEntity<List<AnswerDetailsResponse>>
 	 * @throws AuthorizationFailedException
-	 * @throws UserNotFoundException
+	 * @throws InvalidQuestionException
 	 */
 	@RequestMapping(method = RequestMethod.GET, path = "answer/all/{questionId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<AnswerDetailsResponse>> getQuestionsByUser(
 			@RequestHeader("authorization") final String authorization,
 			@PathVariable("questionId") final String questionId)
-			throws AuthorizationFailedException, UserNotFoundException {
+			throws AuthorizationFailedException, InvalidQuestionException {
 
-		List<AnswerEntity> listOfAnswers = answerBusinessService.getAllAnswersToQuestion(authorization, questionId);
+
+		String bearerToken = null;
+		try {
+			bearerToken = authorization.split("Bearer ")[1];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			bearerToken = authorization;
+		}
+
+		List<AnswerEntity> listOfAnswers = answerBusinessService.getAllAnswersToQuestion(bearerToken, questionId);
 		List<AnswerDetailsResponse> answerDetailsResponse = getCustomizedAnswerContent(listOfAnswers);
 
 		return new ResponseEntity<List<AnswerDetailsResponse>>(answerDetailsResponse, HttpStatus.OK);
@@ -118,12 +126,19 @@ public class AnswerController {
 		return answerDetailsResponse;
 	}
 
-	@RequestMapping(path = "/answer/delete/{answerId}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(method = RequestMethod.DELETE, path = "/answer/delete/{answerId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<AnswerDeleteResponse> deleteAnswer(@RequestHeader("authorization") final String authorization, @PathVariable("answerId") final String ansUuid) throws AuthorizationFailedException, AnswerNotFoundException {
 
-		String authorizationToken = authorization.split("Bearer")[1];
-		AnswerEntity ansEntity = deleteAnswerBusinessService.deleteAnswer(ansUuid, authorizationToken);
-		AnswerDeleteResponse answerRsp = new AnswerDeleteResponse().id(ansEntity.getUuid()).status("ANSWER DELETED");
+		String bearerToken = null;
+		try {
+			bearerToken = authorization.split("Bearer ")[1];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			bearerToken = authorization;
+		}
+
+		// delete requested user
+		deleteAnswerBusinessService.deleteAnswer(ansUuid, bearerToken);
+		AnswerDeleteResponse answerRsp = new AnswerDeleteResponse().id(ansUuid).status("ANSWER DELETED");
 		return new ResponseEntity<AnswerDeleteResponse>(answerRsp, HttpStatus.OK);
 	}
 }

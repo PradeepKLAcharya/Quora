@@ -4,6 +4,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,8 +16,8 @@ import java.time.ZonedDateTime;
 @Table(name = "answer", schema = "public")
 @NamedQueries(
         {
-                @NamedQuery(name = "answerEntityByUuid", query = "select ae from Answer ae where ae.uuid = :uuid"),
-                @NamedQuery(name = "answersByQuestionId", query = "select ae from Answer ae inner join ae" +
+                @NamedQuery(name = "answerEntityByUuid", query = "select ae from AnswerEntity ae where ae.uuid = :uuid"),
+                @NamedQuery(name = "answersByQuestionId", query = "select ae from AnswerEntity ae inner join ae" +
                         ".question qn where qn.uuid = :uuid"),
         }
 )

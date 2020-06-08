@@ -122,7 +122,7 @@ public class AnswerController {
 	public ResponseEntity<AnswerDeleteResponse> deleteAnswer(@RequestHeader("authorization") final String authorization, @PathVariable("answerId") final String ansUuid) throws AuthorizationFailedException, AnswerNotFoundException {
 
 		String authorizationToken = authorization.split("Bearer")[1];
-		Answer ansEntity = deleteAnswerBusinessService.deleteAnswer(ansUuid, authorizationToken);
+		AnswerEntity ansEntity = deleteAnswerBusinessService.deleteAnswer(ansUuid, authorizationToken);
 		AnswerDeleteResponse answerRsp = new AnswerDeleteResponse().id(ansEntity.getUuid()).status("ANSWER DELETED");
 		return new ResponseEntity<AnswerDeleteResponse>(answerRsp, HttpStatus.OK);
 	}

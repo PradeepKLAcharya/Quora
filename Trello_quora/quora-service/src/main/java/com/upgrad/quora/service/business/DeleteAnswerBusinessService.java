@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
+@Service
 public class DeleteAnswerBusinessService {
     @Autowired
     UserDao userDao;
@@ -21,7 +21,7 @@ public class DeleteAnswerBusinessService {
     @Transactional(propagation = Propagation.REQUIRED)
     public AnswerEntity deleteAnswer(String ansUuid, String token) throws AuthorizationFailedException, AnswerNotFoundException {
 
-        UserAuthEntity userAuth = userDao.getUserAuthByToken(token);
+        UserAuthEntity userAuth = userDao.getUserAuthToken(token);
         if (userAuth == null) {
             throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
         }

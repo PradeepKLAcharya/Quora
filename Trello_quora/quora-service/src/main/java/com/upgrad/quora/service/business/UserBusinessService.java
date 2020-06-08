@@ -23,7 +23,7 @@ public class UserBusinessService {
 
         if(userAuthTokenEntity.getLogoutAt()!=null)
         {
-            throw new AuthorizationFailedException("ATHR-002","User is signed out.Sign in first to get all questions posted by a specific user");
+            throw new AuthorizationFailedException("ATHR-002","User is signed out.Sign in first to get user details");
         }
         UsersEntity userEntity =  userDao.getUser(userUuid);
         if(userEntity == null){

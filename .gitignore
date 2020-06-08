@@ -89,7 +89,6 @@ Trello_quora/quora-service/target/maven-status/maven-compiler-plugin/compile/def
 Trello_quora/quora-service/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
 Trello_quora/quora-service/target/quora-service-1.0-SNAPSHOT.jar
 Trello_quora/.idea/vcs.xml
-Trello_quora/pom.xml
 Trello_quora/quora-api/src/main/java/com/upgrad/quora/api/controller/SignupController.java
 Trello_quora/quora-api/src/main/java/com/upgrad/quora/api/controller/SignupController.java
 Trello_quora/quora-api/target/classes/.swagger-codegen-ignore
@@ -114,5 +113,6 @@ Trello_quora/quora-api/target/classes/pom.xml
 Trello_quora/quora-api/target/surefire-reports/TEST-com.upgrad.quora.api.controller.AnswerControllerTest.xml
 *.txt
 Trello_quora/quora-api/target/surefire-reports/TEST-com.upgrad.quora.api.controller.AnswerControllerTest.xml
+Trello_quora/quora-api/target/surefire-reports/com.upgrad.quora.api.controller.AnswerControllerTest.txt
 Trello_quora/quora-api/target/surefire-reports/com.upgrad.quora.api.controller.AnswerControllerTest.txt
 Trello_quora/quora-api/target/surefire-reports/com.upgrad.quora.api.controller.AnswerControllerTest.txt

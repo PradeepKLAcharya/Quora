@@ -151,7 +151,7 @@ public class QuestionController {
 			@PathVariable("questionId") final String questionId)
 			throws AuthorizationFailedException, InvalidQuestionException {
 
-		QuestionEntity questionEntity = questionService.deleteQuestion(accessToken, questionId);
+		QuestionEntity questionEntity = questionService.deleteQuestion(questionId, accessToken);
 		QuestionDeleteResponse questionDeleteResponse = new QuestionDeleteResponse();
 		questionDeleteResponse.setId(questionEntity.getUuid());
 		questionDeleteResponse.setStatus("QUESTION DELETED");

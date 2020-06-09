@@ -29,12 +29,12 @@ public class QuestionEntity implements Serializable {
 	private Integer id;
 
 	@Column(name = "UUID")
-	@Size(max = 64)
+	@Size(max = 200)
 	private String uuid;
 
 	@Column(name = "CONTENT")
 	@NotNull
-	@Size(max = 200)
+	@Size(max = 500)
 	private String content;
 
 	@Column(name = "DATE")

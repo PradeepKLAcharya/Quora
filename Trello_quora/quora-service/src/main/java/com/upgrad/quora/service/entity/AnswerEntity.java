@@ -30,12 +30,12 @@ public class AnswerEntity implements Serializable {
 
     @Column(name = "UUID")
     @NotNull
-    @Size(max = 64)
+    @Size(max = 200)
     private String uuid;
 
     @Column(name = "ANS")
     @NotNull
-    @Size(max = 200)
+    @Size(max = 255)
     private String ans;
 
     @Column(name = "DATE")
@@ -54,7 +54,7 @@ public class AnswerEntity implements Serializable {
 
     @Column(name = "ROLE")
     @NotNull
-    @Size(max = 200)
+    @Size(max = 30)
     private String role;
     
     public String getRole() {

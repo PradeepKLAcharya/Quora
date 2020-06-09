@@ -36,7 +36,7 @@ public class UserAuthEntity implements Serializable {
 
     @Column(name = "UUID")
     @NotNull
-    @Size(max = 500)
+    @Size(max = 200)
     private String uuid;
 
     public String getUuid() {

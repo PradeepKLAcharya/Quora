@@ -26,46 +26,49 @@ public class UsersEntity implements Serializable {
     private Integer id;
 
     @Column(name = "UUID")
-    @Size(max = 64)
+    @NotNull
+    @Size(max = 200)
     private String uuid;
 
     @Column(name = "EMAIL")
     @NotNull
-    @Size(max = 200)
+    @Size(max = 50)
     private String email;
 
     @Column(name = "USERNAME")
     @NotNull
-    @Size(max = 200)
+    @Size(max = 30)
     private String username;
 
 
     //@ToStringExclude
     @Column(name = "PASSWORD")
+    @NotNull
+    @Size(max = 255)
     private String password;
 
     @Column(name = "FIRSTNAME")
     @NotNull
-    @Size(max = 200)
+    @Size(max = 30)
     private String firstName;
 
     @Column(name = "LASTNAME")
     @NotNull
-    @Size(max = 200)
+    @Size(max = 30)
     private String lastName;
 
     @Column(name = "COUNTRY")
     @NotNull
-    @Size(max = 200)
+    @Size(max = 30)
     private String country;
 
     @Column(name = "ABOUTME")
     @NotNull
-    @Size(max = 200)
+    @Size(max = 50)
     private String aboutme;
 
     @Column(name = "ROLE")
-    @Size(max = 200)
+    @Size(max = 30)
     private String role;
 
     @Column(name = "SALT")
@@ -80,7 +83,7 @@ public class UsersEntity implements Serializable {
 
     @Column(name = "CONTACTNUMBER")
     @NotNull
-    @Size(max = 50)
+    @Size(max = 30)
     private String contactnumber;
 
     public Integer getId() {

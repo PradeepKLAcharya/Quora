@@ -14,7 +14,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.5</version>
+            <version>42.2.25</version>
             <!--<version>9.3-1100-jdbc41</version>-->
         </dependency>
         <dependency>
